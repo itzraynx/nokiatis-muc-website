@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nokiatis MUC — Official Download | Team Nokiatis</title>
+<meta name="description" content="Nokiatis MUC — free Android music player by Team Nokiatis. Liquid Glass design, word-synced lyrics, offline downloads, widgets. Official signed APK. | الموقع الرسمي لتطبيق Nokiatis MUC — تنزيل النسخة الرسمية الموقعة.">
+<meta property="og:title" content="Nokiatis MUC — Official">
+<meta property="og:description" content="Your music, in liquid glass. Free Android music player by Team Nokiatis.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/icon.jpg">
+<link rel="icon" href="images/icon.jpg">
+<style>
+  :root{
+    --bg:#050707; --surface:#101713; --surface2:#151E1A; --phone:#0B100E;
+    --edge:rgba(255,255,255,.09); --text:#EDF2EE; --muted:#A8B3AD; --faint:#7C8A83;
+    --green:#22C55E; --green-l:#86EFAC; --green-d:#15803D; --violet:#8B5CF6; --amber:#F59E0B; --coral:#F87171;
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Segoe UI",sans-serif;line-height:1.65;overflow-x:hidden}
+  a{color:var(--green-l)}
+  .glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:
+    radial-gradient(900px 520px at 12% -8%, rgba(34,197,94,.16), transparent 60%),
+    radial-gradient(800px 500px at 88% 12%, rgba(139,92,246,.10), transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, rgba(34,197,94,.07), transparent 60%)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+  nav{position:sticky;top:14px;z-index:50;margin-top:14px}
+  .nav-in{display:flex;align-items:center;gap:12px;background:rgba(16,23,19,.75);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--edge);border-radius:999px;padding:9px 10px 9px 16px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+  [dir=rtl] .nav-in{padding:9px 16px 9px 10px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text)}
+  .brand img{width:34px;height:34px;border-radius:10px}
+  .brand b{font-size:16px}
+  .brand small{display:block;font-size:9.5px;letter-spacing:2.4px;color:var(--faint);font-weight:700}
+  .nav-links{display:flex;gap:2px;margin-inline-start:auto}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;padding:8px 11px;border-radius:999px}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+  .lang-btn{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--text);font-weight:700;font-size:13px;
+    padding:9px 15px;border-radius:999px;cursor:pointer;font-family:inherit}
+  .lang-btn:hover{background:rgba(255,255,255,.12)}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#04120A;font-weight:800;text-decoration:none;
+    padding:14px 26px;border-radius:999px;font-size:15.5px;box-shadow:0 12px 30px rgba(34,197,94,.35);transition:transform .15s ease,box-shadow .15s ease;border:none;cursor:pointer;font-family:inherit}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(34,197,94,.45)}
+  .btn.small{padding:10px 18px;font-size:13.5px}
+  .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--edge);box-shadow:none}
+  .btn.ghost:hover{background:rgba(255,255,255,.1)}
+  .hero{display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;padding:66px 0 26px}
+  .eyebrow{font-size:11px;letter-spacing:3px;font-weight:800;color:var(--green-l);text-transform:uppercase}
+  h1{font-size:clamp(40px,6vw,64px);line-height:1.08;font-weight:900;letter-spacing:-.5px;margin:14px 0 16px}
+  h1 .grad{background:linear-gradient(92deg,#fff 10%,var(--green-l) 55%,var(--green) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:17.5px;color:var(--muted);max-width:570px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0 18px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:rgba(255,255,255,.05);border:1px solid var(--edge);border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--muted)}
+  .chip b{color:var(--text)}
+  .hero-note{font-size:13px;color:var(--faint);margin-top:14px}
+  .hero-shot{display:flex;justify-content:center;position:relative}
+  .frame{background:var(--phone);border:1px solid rgba(255,255,255,.15);border-radius:42px;padding:11px;
+    box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 90px rgba(34,197,94,.13);position:relative}
+  .frame img{display:block;width:100%;border-radius:32px}
+  .frame.hero-f{width:min(300px,82vw)}
+  .badge-float{position:absolute;background:rgba(16,23,19,.88);border:1px solid var(--edge);backdrop-filter:blur(10px);
+    padding:9px 14px;border-radius:16px;font-size:12.5px;font-weight:700;box-shadow:0 16px 34px rgba(0,0,0,.5);z-index:2}
+  .badge-float small{display:block;color:var(--faint);font-weight:700;font-size:10px;letter-spacing:1.6px}
+  .bf1{inset-inline-end:-14px;top:70px}
+  .bf2{inset-inline-start:-16px;bottom:110px}
+  section{padding:62px 0 6px;scroll-margin-top:96px}
+  h2{font-size:clamp(27px,4vw,39px);font-weight:900;letter-spacing:-.4px;line-height:1.18}
+  .sub{color:var(--muted);max-width:700px;margin-top:10px;font-size:15.5px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .card{background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--edge);border-radius:var(--radius);padding:24px}
+  .card .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);margin-bottom:14px}
+  .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .card.violet .ic{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.3)}
+  .card.amber .ic{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3)}
+  .card.coral .ic{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.3)}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+  .shot{text-align:center}
+  .shot .frame{border-radius:36px;padding:9px}
+  .shot .frame img{border-radius:28px}
+  .shot figcaption{margin-top:13px;font-weight:800;font-size:15px}
+  .shot p{color:var(--muted);font-size:13.5px;max-width:300px;margin:4px auto 0}
+  .dl-box{margin-top:28px;background:linear-gradient(160deg,rgba(34,197,94,.14),rgba(16,23,19,.92) 45%);border:1px solid rgba(34,197,94,.3);
+    border-radius:28px;padding:32px;display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center}
+  .dl-box>img{width:92px;height:92px;border-radius:24px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+  .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;font-size:13.5px;color:var(--muted);margin-top:10px}
+  .facts b{color:var(--text)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;word-break:break-all;direction:ltr;unicode-bidi:embed}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+  .step{background:var(--surface);border:1px solid var(--edge);border-radius:var(--radius);padding:22px}
+  .num{width:34px;height:34px;border-radius:50%;background:var(--green);color:#04120A;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .step h3{font-size:15.5px;font-weight:800;margin-bottom:5px}
+  .step p{font-size:13.5px;color:var(--muted)}
+  .callout{margin-top:18px;border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.08);color:#FCD9A0;border-radius:18px;padding:16px 20px;font-size:14px}
+  .callout.green{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08);color:#C9F5D9}
+  .split{display:grid;grid-template-columns:auto 1fr;gap:38px;align-items:start;margin-top:28px}
+  .split .frame{width:min(280px,78vw)}
+  .wlist{display:grid;gap:13px}
+  .witem{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:17px 20px}
+  .witem b{font-size:15.5px}
+  .witem span{float:inline-end;font-size:11px;letter-spacing:1.4px;color:var(--faint);font-weight:800}
+  .witem p{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .faq{margin-top:24px;display:grid;gap:12px}
+  details{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:18px 22px}
+  summary{cursor:pointer;font-weight:800;font-size:15.5px;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  details p{color:var(--muted);font-size:14.5px;margin-top:9px}
+  footer{margin:76px 0 34px;border-top:1px solid var(--edge);padding-top:28px;color:var(--faint);font-size:13px}
+  .foot{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .foot a{color:var(--muted);text-decoration:none;font-weight:600}
+  .foot a:hover{color:var(--text)}
+  @media (max-width:940px){
+    .hero{grid-template-columns:1fr;padding-top:40px}
+    .grid{grid-template-columns:1fr 1fr}
+    .shots{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .dl-box{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr;justify-items:center}
+    .nav-links{display:none}
+    .bf1{inset-inline-end:2px}.bf2{inset-inline-start:2px}
+  }
+  @media (max-width:600px){
+    .grid,.shots,.steps{grid-template-columns:1fr}
+    .shots .frame{max-width:300px;margin:0 auto}
+    .facts{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+
+  <nav><div class="nav-in">
+    <a class="brand" href="#top"><img src="images/icon.jpg" alt="Nokiatis MUC">
+      <span><b>Nokiatis MUC</b><small>TEAM NOKIATIS</small></span></a>
+    <div class="nav-links">
+      <a href="#features" data-i="n1">Features</a><a href="#screens" data-i="n2">Screenshots</a>
+      <a href="#download" data-i="n3">Download</a><a href="#safety" data-i="n4">Safety</a>
+      <a href="#install" data-i="n5">Install</a><a href="#faq" data-i="n6">FAQ</a>
+    </div>
+    <button class="lang-btn" id="langBtn" type="button">العربية</button>
+    <a class="btn small" id="navDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="n7">⬇ Get the app</span></a>
+  </div></nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow" data-i="h1">Free Android music player</div>
+      <h1><span data-i="h2">Your music,</span><br><span class="grad" data-i="h3">in liquid glass.</span></h1>
+      <p class="lede" data-i="h4">Nokiatis MUC is a fast, beautiful music player by Team Nokiatis — word-by-word synced lyrics, offline downloads, smart mixes made on your device, home-screen widgets and true background playback. No account. No sign-up. Just press play.</p>
+      <div class="hero-cta">
+        <a class="btn" id="heroDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="h5">⬇ Download the latest version</span></a>
+        <a class="btn ghost" href="#safety"><span data-i="h6">🛡️ Is it safe?</span></a>
+      </div>
+      <div class="chips">
+        <span class="chip"><span data-i="h7">Version</span> <b id="vText">1.12.0</b></span>
+        <span class="chip">Android <b>7.0+</b></span>
+        <span class="chip"><span data-i="h8">Size</span> <b id="sizeText">≈ 49 MB</b></span>
+        <span class="chip"><b data-i="h9">Free</b> · <span data-i="h10">no subscription</span></span>
+      </div>
+      <p class="hero-note" data-i="h11">This is the only official download page for Nokiatis MUC. Every build here is the original, signed by Team Nokiatis.</p>
+    </div>
+    <div class="hero-shot">
+      <div class="frame hero-f"><img src="images/home.jpg" alt="Nokiatis MUC home screen"></div>
+      <div class="badge-float bf1"><small data-i="b1">SYNCED LYRICS</small><span data-i="b2">word by word ♪</span></div>
+      <div class="badge-float bf2"><small data-i="b3">PRIVATE</small><span data-i="b4">no account needed</span></div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="eyebrow" data-i="f0">Why Nokiatis</div>
+    <h2 data-i="f1">Everything a music app should feel like</h2>
+    <p class="sub" data-i="f2">Designed around one idea: the music comes first, and the interface melts around it.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🫧</div><h3 data-i="f3">Liquid Glass — or Classic</h3><p data-i="f4">A floating glass dock, a full-bleed cover player and springy, touchable controls. Prefer the original look? One switch restores the classic UI.</p></div>
+      <div class="card violet"><div class="ic">🎤</div><h3 data-i="f5">Lyrics that keep up</h3><p data-i="f6">Word-by-word synced lyrics gathered from several sources and matched to the exact recording you're hearing — with per-song source switching and timing fine-tune.</p></div>
+      <div class="card"><div class="ic">⬇️</div><h3 data-i="f7">Real offline downloads</h3><p data-i="f8">Every song has a Download button. Songs, albums and playlists save fast into your in-app Downloads and play with no connection at all.</p></div>
+      <div class="card amber"><div class="ic">✨</div><h3 data-i="f9">Smart mixes, on-device</h3><p data-i="f10">Daily mixes, Song Radio, smart shuffle and a recommendation engine that learns from your plays, skips and likes — calculated on your phone, not in a cloud profile.</p></div>
+      <div class="card"><div class="ic">🎧</div><h3 data-i="f11">Background playback done right</h3><p data-i="f12">Music keeps playing with the screen off, with Previous / Play / Next on your lock screen and the app visible in Android's Active apps.</p></div>
+      <div class="card coral"><div class="ic">🧩</div><h3 data-i="f13">Four home-screen widgets</h3><p data-i="f14">Player, Compact, Big Artwork and Quick Play (Liked Shuffle, Offline Mix, Radio, Discover) — control your music without opening the app.</p></div>
+      <div class="card violet"><div class="ic">👤</div><h3 data-i="f15">Real artist & album pages</h3><p data-i="f16">Tap any artist to open their page with their catalogue and monthly listeners. Albums open, play, shuffle, download and save as complete collections.</p></div>
+      <div class="card"><div class="ic">🌙</div><h3 data-i="f17">Sleep timer with fade-out</h3><p data-i="f18">Drift off while the volume gently fades to silence — after a few minutes or at the end of the song.</p></div>
+      <div class="card amber"><div class="ic">📊</div><h3 data-i="f19">Your Taste DNA</h3><p data-i="f20">Listening stats, streaks and a Taste DNA breakdown computed from your real plays — on this device only, never sent anywhere.</p></div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="eyebrow" data-i="s0">See it</div>
+    <h2 data-i="s1">Real screenshots, straight from the app</h2>
+    <p class="sub" data-i="s2">Taken on a Galaxy S23 FE running the current version — what you see is exactly what you get.</p>
+    <div class="shots">
+      <figure class="shot"><div class="frame"><img src="images/home.jpg" loading="lazy" alt=""></div><figcaption data-i="s3">Home</figcaption><p data-i="s4">A greeting, your listening stats, moods and quick actions.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/lyrics.jpg" loading="lazy" alt=""></div><figcaption data-i="s5">Synced lyrics</figcaption><p data-i="s6">Syllable-by-syllable karaoke, multi-source, with your own timing offset.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/search.jpg" loading="lazy" alt=""></div><figcaption data-i="s7">Search</figcaption><p data-i="s8">Trending, recents and categories — songs, artists, feelings.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/library.jpg" loading="lazy" alt=""></div><figcaption data-i="s9">Your Library</figcaption><p data-i="s10">Playlists, artists, albums, Liked — plus public playlist import.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/history.jpg" loading="lazy" alt=""></div><figcaption data-i="s11">History & Taste DNA</figcaption><p data-i="s12">Plays, skips, streaks and how your taste breaks down.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/settings.jpg" loading="lazy" alt=""></div><figcaption data-i="s13">Make it yours</figcaption><p data-i="s14">On-device profile, Liquid Glass or Classic, and deep controls.</p></figure>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="eyebrow" data-i="d0">Official build</div>
+    <h2 data-i="d1">Download Nokiatis MUC</h2>
+    <p class="sub" data-i="d2">This button always gives you the newest official version. The details below update automatically with every release, so you can verify your file.</p>
+    <div class="dl-box">
+      <img src="images/icon.jpg" alt="Nokiatis MUC icon">
+      <div>
+        <div style="font-size:20px;font-weight:900">Nokiatis MUC <span id="dlVersion">v1.12.0</span></div>
+        <div class="facts">
+          <span><span data-i="d3">Package:</span> <b>com.nokiatis.muc</b></span>
+          <span><span data-i="d4">Requires:</span> <b>Android 7.0+</b></span>
+          <span><span data-i="d5">Size:</span> <b id="dlSize">48,949,129 bytes</b></span>
+          <span><span data-i="d6">Released:</span> <b id="dlDate">—</b></span>
+          <span><span data-i="d7">Signer:</span> <b>Team Nokiatis</b></span>
+          <span>SHA-256: <b class="mono" id="dlSha">6639f954a9227fa12db8b7de39ed95c5319359d1a7de4c5d4696d7411723fac0</b></span>
+        </div>
+      </div>
+      <div style="display:grid;gap:10px">
+        <a class="btn" id="mainDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="d8">⬇ Download APK</span></a>
+        <a class="btn ghost" href="https://github.com/itzraynx/nokiatis-muc-updates/releases" target="_blank" rel="noopener"><span data-i="d9">All releases & notes</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety">
+    <div class="eyebrow" data-i="sf0">Safety</div>
+    <h2 data-i="sf1">Is Nokiatis MUC safe? Yes — it's the original.</h2>
+    <p class="sub" data-i="sf2">Nokiatis MUC is not a virus and contains no malware. Because it is installed directly from this website instead of Google Play, Android shows a generic warning — here is exactly what that means and how to verify the app yourself.</p>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="card"><div class="ic">🔑</div><h3 data-i="sf3">One official signature</h3><p><span data-i="sf4">Every official build is signed with the same Team Nokiatis key (certificate SHA-256 below). Android itself refuses to install an update signed by anyone else over your app.</span><br><span class="mono">DDA7F001A4DC1DA3A7C39C0A45C81010C0E66AD0A4A952F815E79EE698C1EFC6</span></p></div>
+      <div class="card"><div class="ic">🧾</div><h3 data-i="sf5">Verify the file yourself</h3><p data-i="sf6">The SHA-256 fingerprint and exact size of the current APK are published above and inside the app. Before installing any update, the app re-checks the size, the SHA-256 and the signature — a modified file is rejected automatically.</p></div>
+      <div class="card"><div class="ic">⚠️</div><h3 data-i="sf7">About the Android warning</h3><p data-i="sf8">“Install unknown apps” and “This file might be harmful” appear for every app installed outside Google Play. They mean “Google Play didn't scan this”, not “a virus was found”. Google Play Protect can still scan Nokiatis MUC after install like any other app.</p></div>
+      <div class="card"><div class="ic">🕵️</div><h3 data-i="sf9">Nothing to hide</h3><p data-i="sf10">No account, no sign-in, no advertising or analytics SDKs. Your library, history and taste data stay on your device. The app only contacts music and lyrics services and the official GitHub update feed.</p></div>
+    </div>
+    <div class="callout green"><span data-i="sf11">Want an independent check? Download the APK, then upload it to VirusTotal to scan it with 60+ antivirus engines and compare its SHA-256 with the one published here.</span>
+      <div style="margin-top:12px"><a class="btn ghost small" href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener"><span data-i="sf12">Scan it on VirusTotal ↗</span></a></div></div>
+    <div class="callout"><span data-i="sf13">Only download Nokiatis MUC from this page or the official GitHub releases. Copies shared on random sites, ads or messaging apps are not ours and may be modified.</span></div>
+  </section>
+
+  <section id="install">
+    <div class="eyebrow" data-i="i0">60-second setup</div>
+    <h2 data-i="i1">How to install</h2>
+    <p class="sub" data-i="i2">Nokiatis MUC installs directly, outside an app store — so Android asks your permission once. That's normal for every direct-download app.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3 data-i="i3">Download</h3><p data-i="i4">Tap “Download APK” above. The file saves to your Downloads folder.</p></div>
+      <div class="step"><div class="num">2</div><h3 data-i="i5">Open the file</h3><p data-i="i6">Tap the finished download and Android opens the installer.</p></div>
+      <div class="step"><div class="num">3</div><h3 data-i="i7">Allow once</h3><p data-i="i8">If Android asks, allow your browser to “install unknown apps” — only the first time.</p></div>
+      <div class="step"><div class="num">4</div><h3 data-i="i9">Install & play</h3><p data-i="i10">Tap Install, then Open. Pick a song and press play.</p></div>
+    </div>
+    <div class="callout"><span data-i="i11">About updates: Nokiatis MUC always runs the latest version. When an update is released, the app downloads it, verifies its signature and checksum, and installs it over your current version — your library, playlists, downloads and settings are kept. This is how every user gets fixes and new features immediately.</span></div>
+  </section>
+
+  <section id="widgets">
+    <div class="eyebrow" data-i="w0">On your home screen</div>
+    <h2 data-i="w1">Widgets for every layout</h2>
+    <p class="sub" data-i="w2">Long-press your home screen → Widgets → Nokiatis MUC → pick one. They stay in sync with what's playing, and Play resumes your last session even after Android closes the app.</p>
+    <div class="split">
+      <div class="frame"><img src="images/widgets.jpg" loading="lazy" alt="Nokiatis MUC widgets in the Android widget picker"></div>
+      <div class="wlist">
+        <div class="witem"><span>2×2 → 4×4</span><b data-i="w3">Big Artwork</b><p data-i="w4">Full-bleed cover art with Previous / Play / Next. Resizable.</p></div>
+        <div class="witem"><span>4×1+</span><b data-i="w5">Player</b><p data-i="w6">Now-playing bar: cover, title, artist and full transport.</p></div>
+        <div class="witem"><span>3×1</span><b data-i="w7">Compact</b><p data-i="w8">Cover, title, Play and Next for tight layouts.</p></div>
+        <div class="witem"><span>4×1</span><b data-i="w9">Quick Play</b><p data-i="w10">One-tap mixes: Liked Shuffle, Offline Mix, Song Radio, Discover.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="eyebrow" data-i="t0">Good to know</div>
+    <h2 data-i="t1">Keep the music playing in the background</h2>
+    <p class="sub" data-i="t2">Some phones (especially Samsung) aggressively stop background apps to save battery. Two one-time settings keep Nokiatis MUC playing for hours:</p>
+    <div class="steps" style="grid-template-columns:repeat(2,1fr)">
+      <div class="step"><div class="num">1</div><h3 data-i="t3">Allow notifications</h3><p data-i="t4">That's what shows your lock-screen player with Previous / Play / Next.</p></div>
+      <div class="step"><div class="num">2</div><h3 data-i="t5">Unrestricted battery</h3><p data-i="t6">In the app: Settings → Lock screen controls → Allow unrestricted battery. On Samsung, also remove Nokiatis MUC from “Sleeping apps”.</p></div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="eyebrow" data-i="p0">Privacy</div>
+    <h2 data-i="p1">Your listening stays yours</h2>
+    <div class="grid">
+      <div class="card"><h3 data-i="p2">No account</h3><p data-i="p3">No sign-up, no login, no server profile. The name you enter in Get Started never leaves your phone.</p></div>
+      <div class="card"><h3 data-i="p4">On-device data</h3><p data-i="p5">Your library, playlists, downloads, history and the taste engine's learning live on the device. Export a backup any time from Settings.</p></div>
+      <div class="card"><h3 data-i="p6">What uses the network</h3><p data-i="p7">Catalogue search, streaming, artwork and lyrics, and the official GitHub update check. Crash reports are written on-device and shared only if you tap Send.</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="eyebrow" data-i="q0">Questions</div>
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details open><summary data-i="q1">Is Nokiatis MUC free?</summary><p data-i="q2">Yes — free to download and use, with no account and no subscription.</p></details>
+      <details><summary data-i="q3">Is it a virus? Why does Android warn me?</summary><p data-i="q4">No. Android warns about any app installed outside Google Play. See the Safety section above: one official Team Nokiatis signature, a published SHA-256 for every build, and in-app verification before every update install.</p></details>
+      <details><summary data-i="q5">Will updates delete my songs and playlists?</summary><p data-i="q6">No. Updates install over the previous version with the same signature, and Android keeps all app data — library, playlists, downloads, history and settings.</p></details>
+      <details><summary data-i="q7">Why can't I stay on an old version?</summary><p data-i="q8">By design: releases fix bugs and refresh streaming sources that change over time, so old builds would slowly break. Updating takes under a minute and keeps everything.</p></details>
+      <details><summary data-i="q9">Where do downloads go?</summary><p data-i="q10">Into the app's own Downloads section, ready for offline playback inside Nokiatis MUC. Use the Download button on any song, album or playlist.</p></details>
+      <details><summary data-i="q11">The music stops when I close the app. Help!</summary><p data-i="q12">That's your phone's battery saver. Allow notifications and set battery to Unrestricted — on Samsung also remove the app from Sleeping apps.</p></details>
+      <details><summary data-i="q13">Is there an iPhone version?</summary><p data-i="q14">Not at the moment — Nokiatis MUC is Android-only (7.0 and newer).</p></details>
+      <details><summary data-i="q15">Something crashed. How do I report it?</summary><p><span data-i="q16">Open Settings → Diagnostics in the app and send the saved report, or file it on our crash-reports page:</span> <a href="https://github.com/itzraynx/nokiatis-muc-crash-reports/issues" target="_blank" rel="noopener">github.com/itzraynx/nokiatis-muc-crash-reports</a></p></details>
+      <details><summary data-i="q17">Who makes Nokiatis MUC?</summary><p data-i="q18">Team Nokiatis, from Agadir, Morocco. This page and the official GitHub updates repository are the only official sources.</p></details>
+    </div>
+  </section>
+
+  <section id="changelog">
+    <div class="eyebrow" data-i="c0">Latest release</div>
+    <h2 id="clTitle"><span data-i="c1">What's new in</span> <span id="clVer">v1.12.0</span></h2>
+    <div class="card" style="margin-top:22px">
+      <p style="color:var(--muted)" id="clBody" data-i="c2">A native-feel motion system across the whole app, double-tap the cover to like with a heart burst, four home-screen widgets, hardened background playback that stays in Active apps, and a new liquid-glass icon.</p>
+      <p style="margin-top:12px"><a href="https://github.com/itzraynx/nokiatis-muc-updates/releases" target="_blank" rel="noopener"><span data-i="c3">Read every release note →</span></a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Team Nokiatis · <span data-i="ft1">Agadir, Morocco</span></span>
+      <span style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="#download" data-i="ft2">Download</a>
+        <a href="#safety" data-i="ft3">Safety</a>
+        <a href="https://github.com/itzraynx/nokiatis-muc-updates/releases" target="_blank" rel="noopener" data-i="ft4">Releases</a>
+        <a href="https://github.com/itzraynx/nokiatis-muc-crash-reports/issues" target="_blank" rel="noopener" data-i="ft5">Crash reports</a>
+        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener" data-i="ft6">Open-source licenses</a>
+      </span>
+    </div>
+    <p style="margin-top:14px" data-i="ft7">Nokiatis MUC is an independent music player by Team Nokiatis. It is not affiliated with YouTube, Google or Spotify. All music, artwork and lyrics belong to their respective owners; please only download content you are entitled to save.</p>
+  </footer>
+</div>
+
+<script>
+var T = {
+ar:{
+ n1:"المميزات",n2:"لقطات الشاشة",n3:"تنزيل",n4:"الأمان",n5:"التثبيت",n6:"الأسئلة الشائعة",n7:"⬇ حمّل التطبيق",
+ h1:"مشغّل موسيقى مجاني لأندرويد",h2:"موسيقاك…",h3:"في زجاجٍ سائل.",
+ h4:"Nokiatis MUC مشغّل موسيقى سريع وجميل من فريق Nokiatis — كلمات متزامنة كلمةً كلمة، تنزيلات تعمل بدون إنترنت، مزيج ذكي يُبنى على جهازك، ودجت للشاشة الرئيسية، وتشغيل حقيقي في الخلفية. بدون حساب وبدون تسجيل… فقط اضغط تشغيل.",
+ h5:"⬇ نزّل أحدث إصدار",h6:"🛡️ هل هو آمن؟",h7:"الإصدار",h8:"الحجم",h9:"مجاني",h10:"بدون اشتراك",
+ h11:"هذه هي صفحة التنزيل الرسمية الوحيدة لتطبيق Nokiatis MUC. كل نسخة هنا أصلية وموقّعة من فريق Nokiatis.",
+ b1:"كلمات متزامنة",b2:"كلمةً كلمة ♪",b3:"خصوصية",b4:"لا حاجة لحساب",
+ f0:"لماذا Nokiatis؟",f1:"كل ما يجب أن يكون عليه تطبيق موسيقى",f2:"مصمّم حول فكرة واحدة: الموسيقى أولًا، والواجهة تذوب من حولها.",
+ f3:"زجاج سائل — أو الكلاسيكي",f4:"شريط زجاجي عائم، مشغّل بغلاف كامل الشاشة، وأزرار نابضة تستجيب للمس. تفضّل الشكل الأصلي؟ زرٌّ واحد يعيد الواجهة الكلاسيكية.",
+ f5:"كلمات تواكب الأغنية",f6:"كلمات متزامنة كلمةً كلمة من عدّة مصادر، تُطابق التسجيل الذي تسمعه تمامًا — مع تغيير المصدر وضبط التوقيت لكل أغنية.",
+ f7:"تنزيل حقيقي بدون إنترنت",f8:"كل أغنية فيها زر تنزيل. الأغاني والألبومات والقوائم تُحفظ بسرعة داخل «التنزيلات» وتعمل بدون أي اتصال.",
+ f9:"مزيج ذكي على جهازك",f10:"ميكسات يومية، راديو الأغنية، خلط ذكي، ومحرك توصيات يتعلّم من تشغيلاتك وتخطّياتك وإعجاباتك — يُحسب على هاتفك لا في سحابة.",
+ f11:"تشغيل في الخلفية كما يجب",f12:"الموسيقى تستمر والشاشة مطفأة، مع السابق/تشغيل/التالي على شاشة القفل، والتطبيق ظاهر في «التطبيقات النشطة» بأندرويد.",
+ f13:"أربعة ودجت للشاشة الرئيسية",f14:"المشغّل، المصغّر، الغلاف الكبير، والتشغيل السريع (خلط المفضلة، ميكس أوفلاين، راديو، ديسكوفر) — تحكّم دون فتح التطبيق.",
+ f15:"صفحات فنّان وألبوم حقيقية",f16:"اضغط أي فنّان لفتح صفحته بأغانيه ومستمعيه الشهريين. والألبومات تفتح وتشتغل وتُنزَّل وتُحفظ كمجموعات كاملة.",
+ f17:"مؤقّت نوم مع خفض تدريجي",f18:"نام بينما ينخفض الصوت بهدوء حتى الصمت — بعد دقائق أو عند نهاية الأغنية.",
+ f19:"بصمة ذوقك Taste DNA",f20:"إحصائيات استماع وسلاسل أيام وتحليل لذوقك من تشغيلاتك الحقيقية — على هذا الجهاز فقط، ولا يُرسل لأي مكان.",
+ s0:"شاهد بنفسك",s1:"لقطات حقيقية من داخل التطبيق",s2:"مأخوذة من Galaxy S23 FE بالإصدار الحالي — ما تراه هو ما ستحصل عليه تمامًا.",
+ s3:"الرئيسية",s4:"تحية، إحصائيات استماعك، أمزجة وإجراءات سريعة.",
+ s5:"الكلمات المتزامنة",s6:"كاراوكي مقطعًا مقطعًا من عدّة مصادر، مع ضبط التوقيت بنفسك.",
+ s7:"البحث",s8:"الرائج والأخير والفئات — أغانٍ وفنانون ومشاعر.",
+ s9:"مكتبتك",s10:"قوائم وفنانون وألبومات ومفضلة — مع استيراد القوائم العامة.",
+ s11:"السجل وبصمة الذوق",s12:"التشغيلات والتخطيات وسلاسل الأيام وتقسيم ذوقك.",
+ s13:"اجعله على ذوقك",s14:"ملف شخصي على الجهاز، زجاج سائل أو كلاسيكي، وتحكم عميق.",
+ d0:"النسخة الرسمية",d1:"نزّل Nokiatis MUC",d2:"هذا الزر يعطيك دائمًا أحدث إصدار رسمي. التفاصيل بالأسفل تتحدّث تلقائيًا مع كل إصدار لكي تتحقق من ملفك بنفسك.",
+ d3:"الحزمة:",d4:"يتطلب:",d5:"الحجم:",d6:"تاريخ الإصدار:",d7:"الموقّع:",d8:"⬇ تنزيل APK",d9:"كل الإصدارات والملاحظات",
+ sf0:"الأمان",sf1:"هل Nokiatis MUC آمن؟ نعم — إنه الأصلي.",
+ sf2:"Nokiatis MUC ليس فيروسًا ولا يحتوي أي برمجيات خبيثة. ولأنه يُثبَّت مباشرة من هذا الموقع بدل Google Play، يُظهر أندرويد تحذيرًا عامًا — وهذا معنى ذلك التحذير بالضبط وكيف تتحقق بنفسك.",
+ sf3:"توقيع رسمي واحد",sf4:"كل نسخة رسمية موقّعة بنفس مفتاح فريق Nokiatis (بصمة الشهادة SHA-256 بالأسفل). وأندرويد نفسه يرفض تثبيت أي تحديث موقّع من غيرنا فوق تطبيقك.",
+ sf5:"تحقق من الملف بنفسك",sf6:"بصمة SHA-256 والحجم الدقيق للنسخة الحالية منشورَان بالأعلى وداخل التطبيق. وقبل تثبيت أي تحديث، يعيد التطبيق فحص الحجم والبصمة والتوقيع — وأي ملف معدَّل يُرفض تلقائيًا.",
+ sf7:"عن تحذير أندرويد",sf8:"رسائل «تطبيقات غير معروفة» و«قد يكون هذا الملف ضارًا» تظهر مع كل تطبيق يُثبَّت خارج Google Play. معناها «Google Play لم يفحص هذا» وليس «تم العثور على فيروس». وPlay Protect يستطيع فحص التطبيق بعد التثبيت كأي تطبيق آخر.",
+ sf9:"لا شيء نخفيه",sf10:"بدون حساب وبدون تسجيل دخول وبدون مكتبات إعلانات أو تتبّع. مكتبتك وسجلّك وبيانات ذوقك تبقى على جهازك. التطبيق يتصل فقط بخدمات الموسيقى والكلمات وبقناة التحديثات الرسمية على GitHub.",
+ sf11:"تريد فحصًا مستقلًا؟ نزّل ملف APK ثم ارفعه إلى VirusTotal لفحصه بأكثر من 60 محرك مضاد فيروسات، وقارن بصمته SHA-256 بالمنشورة هنا.",
+ sf12:"افحصه على VirusTotal ↗",
+ sf13:"نزّل Nokiatis MUC فقط من هذه الصفحة أو من إصدارات GitHub الرسمية. النسخ المنتشرة في مواقع عشوائية أو إعلانات أو تطبيقات مراسلة ليست منا وقد تكون معدَّلة.",
+ i0:"تثبيت في 60 ثانية",i1:"طريقة التثبيت",i2:"Nokiatis MUC يُثبَّت مباشرة خارج أي متجر — لذلك يطلب أندرويد إذنك مرة واحدة. هذا طبيعي مع كل تطبيق يُنزَّل مباشرة.",
+ i3:"نزّل",i4:"اضغط «تنزيل APK» بالأعلى، وسيُحفظ الملف في مجلد التنزيلات.",
+ i5:"افتح الملف",i6:"اضغط على التنزيل بعد اكتماله وسيفتح أندرويد المثبّت.",
+ i7:"اسمح مرة واحدة",i8:"إذا سألك أندرويد، اسمح لمتصفحك بـ«تثبيت تطبيقات غير معروفة» — مرة واحدة فقط.",
+ i9:"ثبّت وشغّل",i10:"اضغط «ثبّت» ثم «افتح». اختر أغنية واضغط تشغيل.",
+ i11:"عن التحديثات: Nokiatis MUC يعمل دائمًا بأحدث إصدار. عند صدور تحديث، ينزّله التطبيق ويتحقق من توقيعه وبصمته ثم يثبّته فوق نسختك الحالية — مكتبتك وقوائمك وتنزيلاتك وإعداداتك كلها محفوظة. هكذا تصل الإصلاحات والميزات الجديدة للجميع فورًا.",
+ w0:"على شاشتك الرئيسية",w1:"ودجت لكل ترتيب",w2:"اضغط مطولًا على الشاشة الرئيسية ← الودجت ← Nokiatis MUC ← اختر واحدًا. تبقى متزامنة مع ما يشتغل، وزر التشغيل يستأنف جلستك الأخيرة حتى بعد أن يغلق أندرويد التطبيق.",
+ w3:"الغلاف الكبير",w4:"غلاف كامل مع السابق/تشغيل/التالي. قابل لتغيير الحجم.",
+ w5:"المشغّل",w6:"شريط «يشتغل الآن»: غلاف وعنوان وفنان وتحكم كامل.",
+ w7:"المصغّر",w8:"غلاف وعنوان وتشغيل وتالي للترتيبات الضيقة.",
+ w9:"التشغيل السريع",w10:"ميكسات بضغطة: خلط المفضلة، ميكس أوفلاين، راديو الأغنية، ديسكوفر.",
+ t0:"من الجيد معرفته",t1:"اجعل الموسيقى تستمر في الخلفية",t2:"بعض الهواتف (خاصة سامسونج) توقف تطبيقات الخلفية بقوة لتوفير البطارية. إعدادان لمرة واحدة يبقيان Nokiatis MUC يعمل لساعات:",
+ t3:"اسمح بالإشعارات",t4:"هي التي تُظهر مشغّل شاشة القفل مع السابق/تشغيل/التالي.",
+ t5:"بطارية غير مقيّدة",t6:"داخل التطبيق: الإعدادات ← التحكم من شاشة القفل ← السماح ببطارية غير مقيّدة. وعلى سامسونج أزل التطبيق أيضًا من «التطبيقات النائمة».",
+ p0:"الخصوصية",p1:"استماعك يبقى ملكك",
+ p2:"بدون حساب",p3:"لا تسجيل ولا دخول ولا ملف على خادم. الاسم الذي تكتبه في البداية لا يغادر هاتفك أبدًا.",
+ p4:"بيانات على الجهاز",p5:"مكتبتك وقوائمك وتنزيلاتك وسجلّك وتعلّم محرك الذوق — كلها على الجهاز. وصدّر نسخة احتياطية متى أردت من الإعدادات.",
+ p6:"ماذا يستخدم الإنترنت؟",p7:"البحث في الكتالوج والبث والأغلفة والكلمات، وفحص التحديثات الرسمية على GitHub. تقارير الأعطال تُكتب على الجهاز ولا تُشارك إلا إذا ضغطت «إرسال».",
+ q1:"هل التطبيق مجاني؟",q2:"نعم — مجاني للتنزيل والاستخدام، بدون حساب وبدون اشتراك.",
+ q3:"هل هو فيروس؟ ولماذا يحذّرني أندرويد؟",q4:"لا. أندرويد يحذّر من أي تطبيق يُثبَّت خارج Google Play. انظر قسم الأمان بالأعلى: توقيع رسمي واحد من فريق Nokiatis، وبصمة SHA-256 منشورة لكل نسخة، وتحقّق داخل التطبيق قبل تثبيت أي تحديث.",
+ q5:"هل التحديثات تحذف أغانيّ وقوائمي؟",q6:"لا. التحديثات تُثبَّت فوق النسخة السابقة بنفس التوقيع، وأندرويد يحتفظ بكل بيانات التطبيق — المكتبة والقوائم والتنزيلات والسجل والإعدادات.",
+ q7:"لماذا لا أستطيع البقاء على إصدار قديم؟",q8:"بالتصميم: الإصدارات تصلح الأخطاء وتجدّد مصادر البث التي تتغيّر مع الوقت، والنسخ القديمة ستتعطّل تدريجيًا. التحديث يستغرق أقل من دقيقة ويحفظ كل شيء.",
+ q9:"أين تذهب التنزيلات؟",q10:"إلى قسم «التنزيلات» داخل التطبيق، جاهزة للتشغيل بدون إنترنت داخل Nokiatis MUC. استخدم زر التنزيل على أي أغنية أو ألبوم أو قائمة.",
+ q11:"الموسيقى تتوقف عندما أغلق التطبيق. ساعدني!",q12:"هذا موفّر بطارية هاتفك. اسمح بالإشعارات واجعل البطارية «غير مقيّدة» — وعلى سامسونج أزل التطبيق من «التطبيقات النائمة» أيضًا.",
+ q13:"هل توجد نسخة آيفون؟",q14:"ليس في الوقت الحالي — Nokiatis MUC لأندرويد فقط (7.0 وأحدث).",
+ q15:"حدث عطل. كيف أبلّغ عنه؟",q16:"افتح الإعدادات ← التشخيص داخل التطبيق وأرسل التقرير المحفوظ، أو قدّمه في صفحة تقارير الأعطال:",
+ q17:"من يصنع Nokiatis MUC؟",q18:"فريق Nokiatis من أكادير، المغرب. هذه الصفحة ومستودع التحديثات الرسمي على GitHub هما المصدران الرسميان الوحيدان.",
+ c0:"أحدث إصدار",c1:"ما الجديد في",c2:"نظام حركة بإحساس التطبيقات الأصلية في كل مكان، اضغط مرتين على الغلاف للإعجاب مع انفجار قلوب، أربعة ودجت للشاشة الرئيسية، تشغيل خلفي أقوى يبقى في «التطبيقات النشطة»، وأيقونة زجاج سائل جديدة.",
+ c3:"اقرأ ملاحظات كل الإصدارات ←",
+ ft1:"أكادير، المغرب",ft2:"تنزيل",ft3:"الأمان",ft4:"الإصدارات",ft5:"تقارير الأعطال",ft6:"تراخيص مفتوحة المصدر",
+ ft7:"Nokiatis MUC مشغّل موسيقى مستقل من فريق Nokiatis، ولا علاقة له بـ YouTube أو Google أو Spotify. كل الموسيقى والأغلفة والكلمات ملك لأصحابها؛ من فضلك نزّل فقط المحتوى الذي يحق لك حفظه."
+}
+};
+var EN = {}; // captured from DOM on load
+document.querySelectorAll('[data-i]').forEach(function(el){ EN[el.getAttribute('data-i')] = el.innerHTML; });
+var feedNotes = null, curLang = 'en';
+function applyLang(l){
+  curLang = l;
+  var ar = (l === 'ar');
+  document.documentElement.lang = ar ? 'ar' : 'en';
+  document.documentElement.dir = ar ? 'rtl' : 'ltr';
+  document.getElementById('langBtn').textContent = ar ? 'English' : 'العربية';
+  document.title = ar ? 'Nokiatis MUC — التنزيل الرسمي | فريق Nokiatis' : 'Nokiatis MUC — Official Download | Team Nokiatis';
+  document.querySelectorAll('[data-i]').forEach(function(el){
+    var k = el.getAttribute('data-i');
+    el.innerHTML = ar ? (T.ar[k] || EN[k]) : EN[k];
+  });
+  if(feedNotes && !ar) document.getElementById('clBody').textContent = feedNotes;
+  try{ localStorage.setItem('nk-lang', l); }catch(e){}
+}
+document.getElementById('langBtn').addEventListener('click', function(){ applyLang(curLang === 'ar' ? 'en' : 'ar'); });
+(function(){
+  var saved = null;
+  try{ saved = localStorage.getItem('nk-lang'); }catch(e){}
+  applyLang(saved || ((navigator.language || 'en').toLowerCase().indexOf('ar') === 0 ? 'ar' : 'en'));
+})();
+// Keep the download facts in sync with the official update feed.
+fetch('https://raw.githubusercontent.com/itzraynx/nokiatis-muc-updates/main/update.json', {cache:'no-store'})
+  .then(function(r){ return r.json(); })
+  .then(function(f){
+    if(!f || !f.latestVersion) return;
+    document.getElementById('vText').textContent = f.latestVersion;
+    document.getElementById('sizeText').textContent = '≈ ' + (f.apkSize/1048576).toFixed(1) + ' MB';
+    document.getElementById('dlVersion').textContent = 'v' + f.latestVersion;
+    document.getElementById('dlSize').textContent = Number(f.apkSize).toLocaleString('en-US') + ' bytes';
+    if(f.sha256) document.getElementById('dlSha').textContent = f.sha256;
+    if(f.publishedAt) document.getElementById('dlDate').textContent = String(f.publishedAt).slice(0,10);
+    if(f.apkUrl){ ['navDownload','heroDownload','mainDownload'].forEach(function(id){ document.getElementById(id).href = f.apkUrl; }); }
+    document.getElementById('clVer').textContent = 'v' + f.latestVersion;
+    if(f.releaseNotes){ feedNotes = f.releaseNotes; if(curLang !== 'ar') document.getElementById('clBody').textContent = f.releaseNotes; }
+  })
+  .catch(function(){});
+</script>
+</body>
+</html>
