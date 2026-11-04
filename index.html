@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050707">
 <title>Nokiatis MUC — Official Download | Team Nokiatis</title>
 <meta name="description" content="Nokiatis MUC — free Android music player by Team Nokiatis. Liquid Glass design, word-synced lyrics, offline downloads, widgets. Official signed APK. | الموقع الرسمي لتطبيق Nokiatis MUC — تنزيل النسخة الرسمية الموقعة.">
 <meta property="og:title" content="Nokiatis MUC — Official">
@@ -10,66 +11,76 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/icon.jpg">
 <link rel="icon" href="images/icon.jpg">
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="preconnect" href="https://github.com">
 <style>
   :root{
     --bg:#050707; --surface:#101713; --surface2:#151E1A; --phone:#0B100E;
     --edge:rgba(255,255,255,.09); --text:#EDF2EE; --muted:#A8B3AD; --faint:#7C8A83;
     --green:#22C55E; --green-l:#86EFAC; --green-d:#15803D; --violet:#8B5CF6; --amber:#F59E0B; --coral:#F87171;
-    --radius:22px;
+    --radius:22px; --sab:env(safe-area-inset-bottom,0px);
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Segoe UI",sans-serif;line-height:1.65;overflow-x:hidden}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.65;overflow-x:hidden}
   a{color:var(--green-l)}
+  img{max-width:100%}
   .glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:
     radial-gradient(900px 520px at 12% -8%, rgba(34,197,94,.16), transparent 60%),
     radial-gradient(800px 500px at 88% 12%, rgba(139,92,246,.10), transparent 60%),
     radial-gradient(700px 600px at 50% 110%, rgba(34,197,94,.07), transparent 60%)}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
-  nav{position:sticky;top:14px;z-index:50;margin-top:14px}
-  .nav-in{display:flex;align-items:center;gap:12px;background:rgba(16,23,19,.75);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-    border:1px solid var(--edge);border-radius:999px;padding:9px 10px 9px 16px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
-  [dir=rtl] .nav-in{padding:9px 16px 9px 10px}
-  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text)}
-  .brand img{width:34px;height:34px;border-radius:10px}
-  .brand b{font-size:16px}
-  .brand small{display:block;font-size:9.5px;letter-spacing:2.4px;color:var(--faint);font-weight:700}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+  nav{position:sticky;top:12px;z-index:50;margin-top:12px}
+  .nav-in{display:flex;align-items:center;gap:10px;background:rgba(16,23,19,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--edge);border-radius:999px;padding:8px 8px 8px 14px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+  [dir=rtl] .nav-in{padding:8px 14px 8px 8px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);min-width:0}
+  .brand img{width:34px;height:34px;border-radius:10px;flex:none}
+  .brand b{font-size:15.5px;white-space:nowrap}
+  .brand small{display:block;font-size:9px;letter-spacing:2.2px;color:var(--faint);font-weight:700}
   .nav-links{display:flex;gap:2px;margin-inline-start:auto}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;padding:8px 11px;border-radius:999px}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;padding:9px 11px;border-radius:999px}
   .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
   .lang-btn{background:rgba(255,255,255,.06);border:1px solid var(--edge);color:var(--text);font-weight:700;font-size:13px;
-    padding:9px 15px;border-radius:999px;cursor:pointer;font-family:inherit}
+    padding:10px 14px;border-radius:999px;cursor:pointer;font-family:inherit;min-height:42px;flex:none}
   .lang-btn:hover{background:rgba(255,255,255,.12)}
-  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#04120A;font-weight:800;text-decoration:none;
-    padding:14px 26px;border-radius:999px;font-size:15.5px;box-shadow:0 12px 30px rgba(34,197,94,.35);transition:transform .15s ease,box-shadow .15s ease;border:none;cursor:pointer;font-family:inherit}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:#04120A;font-weight:800;text-decoration:none;
+    padding:14px 26px;border-radius:999px;font-size:15.5px;min-height:50px;box-shadow:0 12px 30px rgba(34,197,94,.35);transition:transform .15s ease,box-shadow .15s ease;border:none;cursor:pointer;font-family:inherit;text-align:center}
   .btn:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(34,197,94,.45)}
-  .btn.small{padding:10px 18px;font-size:13.5px}
+  .btn:active{transform:translateY(0) scale(.98)}
+  .btn.small{padding:10px 18px;font-size:13.5px;min-height:44px}
   .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--edge);box-shadow:none}
   .btn.ghost:hover{background:rgba(255,255,255,.1)}
-  .hero{display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;padding:66px 0 26px}
+  .hero{display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;padding:62px 0 26px}
   .eyebrow{font-size:11px;letter-spacing:3px;font-weight:800;color:var(--green-l);text-transform:uppercase}
-  h1{font-size:clamp(40px,6vw,64px);line-height:1.08;font-weight:900;letter-spacing:-.5px;margin:14px 0 16px}
+  h1{font-size:clamp(38px,6vw,64px);line-height:1.1;font-weight:900;letter-spacing:-.5px;margin:14px 0 16px}
   h1 .grad{background:linear-gradient(92deg,#fff 10%,var(--green-l) 55%,var(--green) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:17.5px;color:var(--muted);max-width:570px}
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0 18px}
+  .lede{font-size:17px;color:var(--muted);max-width:570px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 16px}
+  .compat{display:none;align-items:flex-start;gap:9px;border-radius:16px;padding:12px 16px;font-size:14px;font-weight:700;margin:2px 0 16px;max-width:570px}
+  .compat.show{display:flex}
+  .compat.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#D9FBE7}
+  .compat.warn{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.45);color:#FBE3B8}
+  .compat.info{background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.45);color:#E9E2FD}
   .chips{display:flex;gap:8px;flex-wrap:wrap}
-  .chip{background:rgba(255,255,255,.05);border:1px solid var(--edge);border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--muted)}
+  .chip{background:rgba(255,255,255,.05);border:1px solid var(--edge);border-radius:999px;padding:8px 13px;font-size:12.5px;font-weight:700;color:var(--muted)}
   .chip b{color:var(--text)}
   .hero-note{font-size:13px;color:var(--faint);margin-top:14px}
   .hero-shot{display:flex;justify-content:center;position:relative}
   .frame{background:var(--phone);border:1px solid rgba(255,255,255,.15);border-radius:42px;padding:11px;
     box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 90px rgba(34,197,94,.13);position:relative}
-  .frame img{display:block;width:100%;border-radius:32px}
+  .frame img{display:block;width:100%;height:auto;border-radius:32px}
   .frame.hero-f{width:min(300px,82vw)}
-  .badge-float{position:absolute;background:rgba(16,23,19,.88);border:1px solid var(--edge);backdrop-filter:blur(10px);
-    padding:9px 14px;border-radius:16px;font-size:12.5px;font-weight:700;box-shadow:0 16px 34px rgba(0,0,0,.5);z-index:2}
+  .badge-float{position:absolute;background:rgba(16,23,19,.9);border:1px solid var(--edge);backdrop-filter:blur(10px);
+    padding:9px 14px;border-radius:16px;font-size:12.5px;font-weight:700;box-shadow:0 16px 34px rgba(0,0,0,.5);z-index:2;max-width:62%}
   .badge-float small{display:block;color:var(--faint);font-weight:700;font-size:10px;letter-spacing:1.6px}
-  .bf1{inset-inline-end:-14px;top:70px}
-  .bf2{inset-inline-start:-16px;bottom:110px}
-  section{padding:62px 0 6px;scroll-margin-top:96px}
-  h2{font-size:clamp(27px,4vw,39px);font-weight:900;letter-spacing:-.4px;line-height:1.18}
+  .bf1{inset-inline-end:2%;top:60px}
+  .bf2{inset-inline-start:0;bottom:100px}
+  section{padding:60px 0 6px;scroll-margin-top:92px}
+  h2{font-size:clamp(26px,4vw,39px);font-weight:900;letter-spacing:-.4px;line-height:1.2}
   .sub{color:var(--muted);max-width:700px;margin-top:10px;font-size:15.5px}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .grid.cols2,.steps.cols2{grid-template-columns:repeat(2,1fr)}
   .card{background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--edge);border-radius:var(--radius);padding:24px}
   .card .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);margin-bottom:14px}
   .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
@@ -84,11 +95,16 @@
   .shot figcaption{margin-top:13px;font-weight:800;font-size:15px}
   .shot p{color:var(--muted);font-size:13.5px;max-width:300px;margin:4px auto 0}
   .dl-box{margin-top:28px;background:linear-gradient(160deg,rgba(34,197,94,.14),rgba(16,23,19,.92) 45%);border:1px solid rgba(34,197,94,.3);
-    border-radius:28px;padding:32px;display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center}
+    border-radius:28px;padding:30px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
   .dl-box>img{width:92px;height:92px;border-radius:24px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
   .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;font-size:13.5px;color:var(--muted);margin-top:10px}
   .facts b{color:var(--text)}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;word-break:break-all;direction:ltr;unicode-bidi:embed}
+  .qr-card{margin-top:16px;background:var(--surface);border:1px solid var(--edge);border-radius:24px;padding:22px;display:none;gap:22px;align-items:center}
+  .qr-card.show{display:flex}
+  .qr-card img{width:148px;height:148px;border-radius:16px;background:#fff;padding:8px;flex:none}
+  .qr-card h3{font-size:17px;font-weight:800}
+  .qr-card p{color:var(--muted);font-size:14px;margin:5px 0 12px}
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
   .step{background:var(--surface);border:1px solid var(--edge);border-radius:var(--radius);padding:22px}
   .num{width:34px;height:34px;border-radius:50%;background:var(--green);color:#04120A;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
@@ -96,7 +112,20 @@
   .step p{font-size:13.5px;color:var(--muted)}
   .callout{margin-top:18px;border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.08);color:#FCD9A0;border-radius:18px;padding:16px 20px;font-size:14px}
   .callout.green{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08);color:#C9F5D9}
-  .split{display:grid;grid-template-columns:auto 1fr;gap:38px;align-items:start;margin-top:28px}
+  .vt-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}
+  .verify{margin-top:18px;background:var(--surface);border:1px solid var(--edge);border-radius:24px;padding:24px}
+  .verify h3{font-size:17px;font-weight:800}
+  .verify>p{color:var(--muted);font-size:14px;margin-top:5px}
+  .drop{margin-top:14px;border:2px dashed rgba(134,239,172,.4);border-radius:18px;padding:26px 16px;text-align:center;cursor:pointer;
+    color:var(--muted);font-weight:700;font-size:14.5px;background:rgba(34,197,94,.04);transition:background .15s,border-color .15s}
+  .drop:hover,.drop.over{background:rgba(34,197,94,.1);border-color:var(--green-l);color:var(--text)}
+  .drop .big{font-size:26px;display:block;margin-bottom:6px}
+  .v-result{display:none;margin-top:14px;border-radius:16px;padding:15px 18px;font-size:14.5px;font-weight:700}
+  .v-result.show{display:block}
+  .v-result.ok{background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.5);color:#D9FBE7}
+  .v-result.bad{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.55);color:#FBD9D9}
+  .v-result.busy{background:rgba(255,255,255,.05);border:1px solid var(--edge);color:var(--muted)}
+  .split{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;margin-top:28px}
   .split .frame{width:min(280px,78vw)}
   .wlist{display:grid;gap:13px}
   .witem{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:17px 20px}
@@ -105,27 +134,67 @@
   .witem p{color:var(--muted);font-size:13.5px;margin-top:3px}
   .faq{margin-top:24px;display:grid;gap:12px}
   details{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:18px 22px}
-  summary{cursor:pointer;font-weight:800;font-size:15.5px;list-style:none}
+  summary{cursor:pointer;font-weight:800;font-size:15.5px;list-style:none;min-height:28px}
   summary::-webkit-details-marker{display:none}
   details p{color:var(--muted);font-size:14.5px;margin-top:9px}
-  footer{margin:76px 0 34px;border-top:1px solid var(--edge);padding-top:28px;color:var(--faint);font-size:13px}
+  footer{margin:74px 0 34px;border-top:1px solid var(--edge);padding-top:28px;color:var(--faint);font-size:13px}
   .foot{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-  .foot a{color:var(--muted);text-decoration:none;font-weight:600}
+  .foot a{color:var(--muted);text-decoration:none;font-weight:600;padding:6px 2px}
   .foot a:hover{color:var(--text)}
+  /* sticky download bar (Android phones) */
+  .sticky-dl{position:fixed;inset-inline:12px;bottom:calc(12px + var(--sab));z-index:60;display:none;align-items:center;gap:12px;
+    background:rgba(14,20,17,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(34,197,94,.35);
+    border-radius:22px;padding:10px 10px 10px 12px;box-shadow:0 22px 44px rgba(0,0,0,.55)}
+  [dir=rtl] .sticky-dl{padding:10px 12px 10px 10px}
+  .sticky-dl img{width:44px;height:44px;border-radius:13px;flex:none}
+  .sticky-dl .meta{flex:1;min-width:0}
+  .sticky-dl .meta b{display:block;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sticky-dl .meta span{font-size:12px;color:var(--muted)}
+  .sticky-dl .btn{flex:none}
+  .sticky-dl .x{background:none;border:none;color:var(--faint);font-size:17px;padding:10px 6px;cursor:pointer;flex:none}
+  @media (max-width:860px){ body.is-android .sticky-dl{display:flex} body.has-bar{padding-bottom:96px} }
+  /* toast */
+  .toast{position:fixed;left:50%;transform:translate(-50%,20px);bottom:calc(96px + var(--sab));z-index:70;max-width:min(92vw,480px);
+    background:rgba(10,16,13,.95);border:1px solid rgba(34,197,94,.45);color:#D9FBE7;border-radius:16px;padding:13px 18px;
+    font-size:13.5px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;box-shadow:0 20px 40px rgba(0,0,0,.5);text-align:center}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn,.toast{transition:none}
+  }
   @media (max-width:940px){
-    .hero{grid-template-columns:1fr;padding-top:40px}
+    .hero{grid-template-columns:1fr;padding-top:36px;gap:30px}
     .grid{grid-template-columns:1fr 1fr}
-    .shots{grid-template-columns:1fr 1fr}
     .steps{grid-template-columns:1fr 1fr}
     .dl-box{grid-template-columns:1fr}
     .split{grid-template-columns:1fr;justify-items:center}
     .nav-links{display:none}
-    .bf1{inset-inline-end:2px}.bf2{inset-inline-start:2px}
+  }
+  @media (max-width:760px){
+    .shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding:4px 2px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .shots::-webkit-scrollbar{display:none}
+    .shot{flex:0 0 74%;max-width:290px;scroll-snap-align:center}
+    .qr-card{flex-direction:column;text-align:center}
   }
   @media (max-width:600px){
-    .grid,.shots,.steps{grid-template-columns:1fr}
-    .shots .frame{max-width:300px;margin:0 auto}
+    .grid,.steps,.grid.cols2,.steps.cols2{grid-template-columns:1fr}
     .facts{grid-template-columns:1fr}
+    .hero-cta .btn{flex:1 1 100%}
+    .wrap{padding:0 16px}
+    .dl-box{padding:24px 20px}
+    .card,.verify{padding:20px}
+    section{padding-top:48px}
+  }
+  @media (max-width:380px){
+    .brand small{display:none}
+    .brand b{font-size:14px}
+    .btn.small{padding:9px 13px;font-size:12.5px}
+    .lang-btn{padding:9px 11px}
+    h1{font-size:34px}
   }
 </style>
 </head>
@@ -134,7 +203,7 @@
 <div class="wrap">
 
   <nav><div class="nav-in">
-    <a class="brand" href="#top"><img src="images/icon.jpg" alt="Nokiatis MUC">
+    <a class="brand" href="#top"><img src="images/icon.jpg" width="34" height="34" alt="Nokiatis MUC">
       <span><b>Nokiatis MUC</b><small>TEAM NOKIATIS</small></span></a>
     <div class="nav-links">
       <a href="#features" data-i="n1">Features</a><a href="#screens" data-i="n2">Screenshots</a>
@@ -142,7 +211,7 @@
       <a href="#install" data-i="n5">Install</a><a href="#faq" data-i="n6">FAQ</a>
     </div>
     <button class="lang-btn" id="langBtn" type="button">العربية</button>
-    <a class="btn small" id="navDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="n7">⬇ Get the app</span></a>
+    <a class="btn small dl-btn" id="navDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="n7">⬇ Get the app</span></a>
   </div></nav>
 
   <header class="hero" id="top">
@@ -151,9 +220,10 @@
       <h1><span data-i="h2">Your music,</span><br><span class="grad" data-i="h3">in liquid glass.</span></h1>
       <p class="lede" data-i="h4">Nokiatis MUC is a fast, beautiful music player by Team Nokiatis — word-by-word synced lyrics, offline downloads, smart mixes made on your device, home-screen widgets and true background playback. No account. No sign-up. Just press play.</p>
       <div class="hero-cta">
-        <a class="btn" id="heroDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="h5">⬇ Download the latest version</span></a>
+        <a class="btn dl-btn" id="heroDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="h5">⬇ Download the latest version</span></a>
         <a class="btn ghost" href="#safety"><span data-i="h6">🛡️ Is it safe?</span></a>
       </div>
+      <p class="compat" id="compatLine"></p>
       <div class="chips">
         <span class="chip"><span data-i="h7">Version</span> <b id="vText">1.12.0</b></span>
         <span class="chip">Android <b>7.0+</b></span>
@@ -163,7 +233,7 @@
       <p class="hero-note" data-i="h11">This is the only official download page for Nokiatis MUC. Every build here is the original, signed by Team Nokiatis.</p>
     </div>
     <div class="hero-shot">
-      <div class="frame hero-f"><img src="images/home.jpg" alt="Nokiatis MUC home screen"></div>
+      <div class="frame hero-f"><img src="images/home.jpg" width="560" height="1213" fetchpriority="high" alt="Nokiatis MUC home screen"></div>
       <div class="badge-float bf1"><small data-i="b1">SYNCED LYRICS</small><span data-i="b2">word by word ♪</span></div>
       <div class="badge-float bf2"><small data-i="b3">PRIVATE</small><span data-i="b4">no account needed</span></div>
     </div>
@@ -189,14 +259,14 @@
   <section id="screens">
     <div class="eyebrow" data-i="s0">See it</div>
     <h2 data-i="s1">Real screenshots, straight from the app</h2>
-    <p class="sub" data-i="s2">Taken on a Galaxy S23 FE running the current version — what you see is exactly what you get.</p>
+    <p class="sub" data-i="s2">Taken on a Galaxy S23 FE running the current version — what you see is exactly what you get. Swipe on mobile.</p>
     <div class="shots">
-      <figure class="shot"><div class="frame"><img src="images/home.jpg" loading="lazy" alt=""></div><figcaption data-i="s3">Home</figcaption><p data-i="s4">A greeting, your listening stats, moods and quick actions.</p></figure>
-      <figure class="shot"><div class="frame"><img src="images/lyrics.jpg" loading="lazy" alt=""></div><figcaption data-i="s5">Synced lyrics</figcaption><p data-i="s6">Syllable-by-syllable karaoke, multi-source, with your own timing offset.</p></figure>
-      <figure class="shot"><div class="frame"><img src="images/search.jpg" loading="lazy" alt=""></div><figcaption data-i="s7">Search</figcaption><p data-i="s8">Trending, recents and categories — songs, artists, feelings.</p></figure>
-      <figure class="shot"><div class="frame"><img src="images/library.jpg" loading="lazy" alt=""></div><figcaption data-i="s9">Your Library</figcaption><p data-i="s10">Playlists, artists, albums, Liked — plus public playlist import.</p></figure>
-      <figure class="shot"><div class="frame"><img src="images/history.jpg" loading="lazy" alt=""></div><figcaption data-i="s11">History & Taste DNA</figcaption><p data-i="s12">Plays, skips, streaks and how your taste breaks down.</p></figure>
-      <figure class="shot"><div class="frame"><img src="images/settings.jpg" loading="lazy" alt=""></div><figcaption data-i="s13">Make it yours</figcaption><p data-i="s14">On-device profile, Liquid Glass or Classic, and deep controls.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/home.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s3">Home</figcaption><p data-i="s4">A greeting, your listening stats, moods and quick actions.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/lyrics.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s5">Synced lyrics</figcaption><p data-i="s6">Syllable-by-syllable karaoke, multi-source, with your own timing offset.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/search.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s7">Search</figcaption><p data-i="s8">Trending, recents and categories — songs, artists, feelings.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/library.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s9">Your Library</figcaption><p data-i="s10">Playlists, artists, albums, Liked — plus public playlist import.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/history.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s11">History & Taste DNA</figcaption><p data-i="s12">Plays, skips, streaks and how your taste breaks down.</p></figure>
+      <figure class="shot"><div class="frame"><img src="images/settings.jpg" width="560" height="1213" loading="lazy" decoding="async" alt=""></div><figcaption data-i="s13">Make it yours</figcaption><p data-i="s14">On-device profile, Liquid Glass or Classic, and deep controls.</p></figure>
     </div>
   </section>
 
@@ -205,7 +275,7 @@
     <h2 data-i="d1">Download Nokiatis MUC</h2>
     <p class="sub" data-i="d2">This button always gives you the newest official version. The details below update automatically with every release, so you can verify your file.</p>
     <div class="dl-box">
-      <img src="images/icon.jpg" alt="Nokiatis MUC icon">
+      <img src="images/icon.jpg" width="92" height="92" alt="Nokiatis MUC icon">
       <div>
         <div style="font-size:20px;font-weight:900">Nokiatis MUC <span id="dlVersion">v1.12.0</span></div>
         <div class="facts">
@@ -218,8 +288,16 @@
         </div>
       </div>
       <div style="display:grid;gap:10px">
-        <a class="btn" id="mainDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="d8">⬇ Download APK</span></a>
+        <a class="btn dl-btn" id="mainDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="d8">⬇ Download APK</span></a>
         <a class="btn ghost" href="https://github.com/itzraynx/nokiatis-muc-updates/releases" target="_blank" rel="noopener"><span data-i="d9">All releases & notes</span></a>
+      </div>
+    </div>
+    <div class="qr-card" id="qrCard">
+      <img src="images/qr.png" width="148" height="148" alt="QR code to this page">
+      <div>
+        <h3 data-i="qr1">On a computer or iPhone?</h3>
+        <p data-i="qr2">Scan this code with your Android phone to open this page there, then install in one tap. Or copy the link and send it to your phone.</p>
+        <button class="btn ghost small" id="copyBtn" type="button"><span data-i="qr3">🔗 Copy page link</span></button>
       </div>
     </div>
   </section>
@@ -228,14 +306,29 @@
     <div class="eyebrow" data-i="sf0">Safety</div>
     <h2 data-i="sf1">Is Nokiatis MUC safe? Yes — it's the original.</h2>
     <p class="sub" data-i="sf2">Nokiatis MUC is not a virus and contains no malware. Because it is installed directly from this website instead of Google Play, Android shows a generic warning — here is exactly what that means and how to verify the app yourself.</p>
-    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="grid cols2">
       <div class="card"><div class="ic">🔑</div><h3 data-i="sf3">One official signature</h3><p><span data-i="sf4">Every official build is signed with the same Team Nokiatis key (certificate SHA-256 below). Android itself refuses to install an update signed by anyone else over your app.</span><br><span class="mono">DDA7F001A4DC1DA3A7C39C0A45C81010C0E66AD0A4A952F815E79EE698C1EFC6</span></p></div>
       <div class="card"><div class="ic">🧾</div><h3 data-i="sf5">Verify the file yourself</h3><p data-i="sf6">The SHA-256 fingerprint and exact size of the current APK are published above and inside the app. Before installing any update, the app re-checks the size, the SHA-256 and the signature — a modified file is rejected automatically.</p></div>
       <div class="card"><div class="ic">⚠️</div><h3 data-i="sf7">About the Android warning</h3><p data-i="sf8">“Install unknown apps” and “This file might be harmful” appear for every app installed outside Google Play. They mean “Google Play didn't scan this”, not “a virus was found”. Google Play Protect can still scan Nokiatis MUC after install like any other app.</p></div>
       <div class="card"><div class="ic">🕵️</div><h3 data-i="sf9">Nothing to hide</h3><p data-i="sf10">No account, no sign-in, no advertising or analytics SDKs. Your library, history and taste data stay on your device. The app only contacts music and lyrics services and the official GitHub update feed.</p></div>
     </div>
-    <div class="callout green"><span data-i="sf11">Want an independent check? Download the APK, then upload it to VirusTotal to scan it with 60+ antivirus engines and compare its SHA-256 with the one published here.</span>
-      <div style="margin-top:12px"><a class="btn ghost small" href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener"><span data-i="sf12">Scan it on VirusTotal ↗</span></a></div></div>
+    <div class="callout green">
+      <span data-i="sf11">Independent check on VirusTotal: the first button opens the exact report page for the current build's SHA-256. If VirusTotal doesn't know this fresh build yet (“Item not found”), use the second button to upload your downloaded APK — it is then scanned by 60+ antivirus engines and the report becomes public at that same link.</span>
+      <div class="vt-btns">
+        <a class="btn ghost small" id="vtReport" href="https://www.virustotal.com/gui/file/6639f954a9227fa12db8b7de39ed95c5319359d1a7de4c5d4696d7411723fac0" target="_blank" rel="noopener"><span data-i="sf12">🛡️ This build on VirusTotal ↗</span></a>
+        <a class="btn ghost small" href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener"><span data-i="sf13b">Upload & scan it yourself ↗</span></a>
+      </div>
+    </div>
+    <div class="verify">
+      <h3 data-i="vf1">✅ Instant check: is your APK genuine?</h3>
+      <p data-i="vf2">Choose the APK you downloaded. It is hashed locally in your browser — the file never leaves your device — and compared with the official SHA-256 above.</p>
+      <div class="drop" id="drop" role="button" tabindex="0">
+        <span class="big">📦</span>
+        <span data-i="vf3">Drop the APK here, or tap to choose the file</span>
+      </div>
+      <input type="file" id="fileInput" accept=".apk,application/vnd.android.package-archive" hidden>
+      <div class="v-result" id="vResult"></div>
+    </div>
     <div class="callout"><span data-i="sf13">Only download Nokiatis MUC from this page or the official GitHub releases. Copies shared on random sites, ads or messaging apps are not ours and may be modified.</span></div>
   </section>
 
@@ -257,7 +350,7 @@
     <h2 data-i="w1">Widgets for every layout</h2>
     <p class="sub" data-i="w2">Long-press your home screen → Widgets → Nokiatis MUC → pick one. They stay in sync with what's playing, and Play resumes your last session even after Android closes the app.</p>
     <div class="split">
-      <div class="frame"><img src="images/widgets.jpg" loading="lazy" alt="Nokiatis MUC widgets in the Android widget picker"></div>
+      <div class="frame"><img src="images/widgets.jpg" width="560" height="1213" loading="lazy" decoding="async" alt="Nokiatis MUC widgets in the Android widget picker"></div>
       <div class="wlist">
         <div class="witem"><span>2×2 → 4×4</span><b data-i="w3">Big Artwork</b><p data-i="w4">Full-bleed cover art with Previous / Play / Next. Resizable.</p></div>
         <div class="witem"><span>4×1+</span><b data-i="w5">Player</b><p data-i="w6">Now-playing bar: cover, title, artist and full transport.</p></div>
@@ -271,7 +364,7 @@
     <div class="eyebrow" data-i="t0">Good to know</div>
     <h2 data-i="t1">Keep the music playing in the background</h2>
     <p class="sub" data-i="t2">Some phones (especially Samsung) aggressively stop background apps to save battery. Two one-time settings keep Nokiatis MUC playing for hours:</p>
-    <div class="steps" style="grid-template-columns:repeat(2,1fr)">
+    <div class="steps cols2">
       <div class="step"><div class="num">1</div><h3 data-i="t3">Allow notifications</h3><p data-i="t4">That's what shows your lock-screen player with Previous / Play / Next.</p></div>
       <div class="step"><div class="num">2</div><h3 data-i="t5">Unrestricted battery</h3><p data-i="t6">In the app: Settings → Lock screen controls → Allow unrestricted battery. On Samsung, also remove Nokiatis MUC from “Sleeping apps”.</p></div>
     </div>
@@ -292,7 +385,7 @@
     <h2>FAQ</h2>
     <div class="faq">
       <details open><summary data-i="q1">Is Nokiatis MUC free?</summary><p data-i="q2">Yes — free to download and use, with no account and no subscription.</p></details>
-      <details><summary data-i="q3">Is it a virus? Why does Android warn me?</summary><p data-i="q4">No. Android warns about any app installed outside Google Play. See the Safety section above: one official Team Nokiatis signature, a published SHA-256 for every build, and in-app verification before every update install.</p></details>
+      <details><summary data-i="q3">Is it a virus? Why does Android warn me?</summary><p data-i="q4">No. Android warns about any app installed outside Google Play. See the Safety section above: one official Team Nokiatis signature, a published SHA-256 for every build, an instant on-page file check, and a VirusTotal link for this exact build.</p></details>
       <details><summary data-i="q5">Will updates delete my songs and playlists?</summary><p data-i="q6">No. Updates install over the previous version with the same signature, and Android keeps all app data — library, playlists, downloads, history and settings.</p></details>
       <details><summary data-i="q7">Why can't I stay on an old version?</summary><p data-i="q8">By design: releases fix bugs and refresh streaming sources that change over time, so old builds would slowly break. Updating takes under a minute and keeps everything.</p></details>
       <details><summary data-i="q9">Where do downloads go?</summary><p data-i="q10">Into the app's own Downloads section, ready for offline playback inside Nokiatis MUC. Use the Download button on any song, album or playlist.</p></details>
@@ -315,7 +408,7 @@
   <footer>
     <div class="foot">
       <span>© 2026 Team Nokiatis · <span data-i="ft1">Agadir, Morocco</span></span>
-      <span style="display:flex;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;gap:14px;flex-wrap:wrap">
         <a href="#download" data-i="ft2">Download</a>
         <a href="#safety" data-i="ft3">Safety</a>
         <a href="https://github.com/itzraynx/nokiatis-muc-updates/releases" target="_blank" rel="noopener" data-i="ft4">Releases</a>
@@ -326,6 +419,14 @@
     <p style="margin-top:14px" data-i="ft7">Nokiatis MUC is an independent music player by Team Nokiatis. It is not affiliated with YouTube, Google or Spotify. All music, artwork and lyrics belong to their respective owners; please only download content you are entitled to save.</p>
   </footer>
 </div>
+
+<div class="sticky-dl" id="stickyBar">
+  <img src="images/icon.jpg" width="44" height="44" alt="">
+  <div class="meta"><b>Nokiatis MUC</b><span><span data-i="sb1">Latest</span> <span id="sbVer">v1.12.0</span> · <span id="sbSize">≈ 49 MB</span></span></div>
+  <a class="btn small dl-btn" id="stickyDownload" href="https://github.com/itzraynx/nokiatis-muc-updates/releases/download/v1.12.0/NokiatisMUC-v1.12.0.apk"><span data-i="sb2">⬇ Install</span></a>
+  <button class="x" id="stickyClose" type="button" aria-label="Close">✕</button>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
 var T = {
@@ -346,7 +447,7 @@ ar:{
  f15:"صفحات فنّان وألبوم حقيقية",f16:"اضغط أي فنّان لفتح صفحته بأغانيه ومستمعيه الشهريين. والألبومات تفتح وتشتغل وتُنزَّل وتُحفظ كمجموعات كاملة.",
  f17:"مؤقّت نوم مع خفض تدريجي",f18:"نام بينما ينخفض الصوت بهدوء حتى الصمت — بعد دقائق أو عند نهاية الأغنية.",
  f19:"بصمة ذوقك Taste DNA",f20:"إحصائيات استماع وسلاسل أيام وتحليل لذوقك من تشغيلاتك الحقيقية — على هذا الجهاز فقط، ولا يُرسل لأي مكان.",
- s0:"شاهد بنفسك",s1:"لقطات حقيقية من داخل التطبيق",s2:"مأخوذة من Galaxy S23 FE بالإصدار الحالي — ما تراه هو ما ستحصل عليه تمامًا.",
+ s0:"شاهد بنفسك",s1:"لقطات حقيقية من داخل التطبيق",s2:"مأخوذة من Galaxy S23 FE بالإصدار الحالي — ما تراه هو ما ستحصل عليه تمامًا. اسحب على الهاتف للتنقل بينها.",
  s3:"الرئيسية",s4:"تحية، إحصائيات استماعك، أمزجة وإجراءات سريعة.",
  s5:"الكلمات المتزامنة",s6:"كاراوكي مقطعًا مقطعًا من عدّة مصادر، مع ضبط التوقيت بنفسك.",
  s7:"البحث",s8:"الرائج والأخير والفئات — أغانٍ وفنانون ومشاعر.",
@@ -355,14 +456,17 @@ ar:{
  s13:"اجعله على ذوقك",s14:"ملف شخصي على الجهاز، زجاج سائل أو كلاسيكي، وتحكم عميق.",
  d0:"النسخة الرسمية",d1:"نزّل Nokiatis MUC",d2:"هذا الزر يعطيك دائمًا أحدث إصدار رسمي. التفاصيل بالأسفل تتحدّث تلقائيًا مع كل إصدار لكي تتحقق من ملفك بنفسك.",
  d3:"الحزمة:",d4:"يتطلب:",d5:"الحجم:",d6:"تاريخ الإصدار:",d7:"الموقّع:",d8:"⬇ تنزيل APK",d9:"كل الإصدارات والملاحظات",
+ qr1:"أنت على حاسوب أو آيفون؟",qr2:"امسح هذا الرمز بهاتف أندرويد لفتح هذه الصفحة عليه ثم الثبّت بضغطة واحدة. أو انسخ الرابط وأرسله لهاتفك.",qr3:"🔗 انسخ رابط الصفحة",
  sf0:"الأمان",sf1:"هل Nokiatis MUC آمن؟ نعم — إنه الأصلي.",
  sf2:"Nokiatis MUC ليس فيروسًا ولا يحتوي أي برمجيات خبيثة. ولأنه يُثبَّت مباشرة من هذا الموقع بدل Google Play، يُظهر أندرويد تحذيرًا عامًا — وهذا معنى ذلك التحذير بالضبط وكيف تتحقق بنفسك.",
  sf3:"توقيع رسمي واحد",sf4:"كل نسخة رسمية موقّعة بنفس مفتاح فريق Nokiatis (بصمة الشهادة SHA-256 بالأسفل). وأندرويد نفسه يرفض تثبيت أي تحديث موقّع من غيرنا فوق تطبيقك.",
  sf5:"تحقق من الملف بنفسك",sf6:"بصمة SHA-256 والحجم الدقيق للنسخة الحالية منشورَان بالأعلى وداخل التطبيق. وقبل تثبيت أي تحديث، يعيد التطبيق فحص الحجم والبصمة والتوقيع — وأي ملف معدَّل يُرفض تلقائيًا.",
  sf7:"عن تحذير أندرويد",sf8:"رسائل «تطبيقات غير معروفة» و«قد يكون هذا الملف ضارًا» تظهر مع كل تطبيق يُثبَّت خارج Google Play. معناها «Google Play لم يفحص هذا» وليس «تم العثور على فيروس». وPlay Protect يستطيع فحص التطبيق بعد التثبيت كأي تطبيق آخر.",
  sf9:"لا شيء نخفيه",sf10:"بدون حساب وبدون تسجيل دخول وبدون مكتبات إعلانات أو تتبّع. مكتبتك وسجلّك وبيانات ذوقك تبقى على جهازك. التطبيق يتصل فقط بخدمات الموسيقى والكلمات وبقناة التحديثات الرسمية على GitHub.",
- sf11:"تريد فحصًا مستقلًا؟ نزّل ملف APK ثم ارفعه إلى VirusTotal لفحصه بأكثر من 60 محرك مضاد فيروسات، وقارن بصمته SHA-256 بالمنشورة هنا.",
- sf12:"افحصه على VirusTotal ↗",
+ sf11:"فحص مستقل على VirusTotal: الزر الأول يفتح صفحة تقرير هذه النسخة بالضبط عبر بصمتها SHA-256. وإذا كان VirusTotal لا يعرف هذه النسخة الجديدة بعد («Item not found»)، استخدم الزر الثاني لرفع ملف APK الذي نزّلته — سيُفحص بأكثر من 60 محرك مضاد فيروسات وسيصبح التقرير عامًا على نفس الرابط.",
+ sf12:"🛡️ هذه النسخة على VirusTotal ↗",sf13b:"ارفع وافحص بنفسك ↗",
+ vf1:"✅ فحص فوري: هل نسختك أصلية؟",vf2:"اختر ملف APK الذي نزّلته. تُحسب بصمته محليًا داخل متصفحك — الملف لا يغادر جهازك أبدًا — وتُقارن بالبصمة الرسمية SHA-256 بالأعلى.",
+ vf3:"اسحب ملف APK هنا، أو اضغط لاختيار الملف",
  sf13:"نزّل Nokiatis MUC فقط من هذه الصفحة أو من إصدارات GitHub الرسمية. النسخ المنتشرة في مواقع عشوائية أو إعلانات أو تطبيقات مراسلة ليست منا وقد تكون معدَّلة.",
  i0:"تثبيت في 60 ثانية",i1:"طريقة التثبيت",i2:"Nokiatis MUC يُثبَّت مباشرة خارج أي متجر — لذلك يطلب أندرويد إذنك مرة واحدة. هذا طبيعي مع كل تطبيق يُنزَّل مباشرة.",
  i3:"نزّل",i4:"اضغط «تنزيل APK» بالأعلى، وسيُحفظ الملف في مجلد التنزيلات.",
@@ -372,34 +476,89 @@ ar:{
  i11:"عن التحديثات: Nokiatis MUC يعمل دائمًا بأحدث إصدار. عند صدور تحديث، ينزّله التطبيق ويتحقق من توقيعه وبصمته ثم يثبّته فوق نسختك الحالية — مكتبتك وقوائمك وتنزيلاتك وإعداداتك كلها محفوظة. هكذا تصل الإصلاحات والميزات الجديدة للجميع فورًا.",
  w0:"على شاشتك الرئيسية",w1:"ودجت لكل ترتيب",w2:"اضغط مطولًا على الشاشة الرئيسية ← الودجت ← Nokiatis MUC ← اختر واحدًا. تبقى متزامنة مع ما يشتغل، وزر التشغيل يستأنف جلستك الأخيرة حتى بعد أن يغلق أندرويد التطبيق.",
  w3:"الغلاف الكبير",w4:"غلاف كامل مع السابق/تشغيل/التالي. قابل لتغيير الحجم.",
- w5:"المشغّل",w6:"شريط «يشتغل الآن»: غلاف وعنوان وفنان وتحكم كامل.",
+ w5:"المشغّل",w6:"شريط «يُشغَّل الآن»: غلاف وعنوان وفنّان وتحكم كامل.",
  w7:"المصغّر",w8:"غلاف وعنوان وتشغيل وتالي للترتيبات الضيقة.",
  w9:"التشغيل السريع",w10:"ميكسات بضغطة: خلط المفضلة، ميكس أوفلاين، راديو الأغنية، ديسكوفر.",
- t0:"من الجيد معرفته",t1:"اجعل الموسيقى تستمر في الخلفية",t2:"بعض الهواتف (خاصة سامسونج) توقف تطبيقات الخلفية بقوة لتوفير البطارية. إعدادان لمرة واحدة يبقيان Nokiatis MUC يعمل لساعات:",
+ t0:"من الجيد معرفته",t1:"اجعل الموسيقى تستمر في الخلفية",t2:"بعض الهواتف (خاصة سامسونج) توقف تطبيقات الخلفية بقوة لتوفير البطارية. إعدادان لمرة واحدة يُبقيان Nokiatis MUC يعمل لساعات:",
  t3:"اسمح بالإشعارات",t4:"هي التي تُظهر مشغّل شاشة القفل مع السابق/تشغيل/التالي.",
  t5:"بطارية غير مقيّدة",t6:"داخل التطبيق: الإعدادات ← التحكم من شاشة القفل ← السماح ببطارية غير مقيّدة. وعلى سامسونج أزل التطبيق أيضًا من «التطبيقات النائمة».",
  p0:"الخصوصية",p1:"استماعك يبقى ملكك",
  p2:"بدون حساب",p3:"لا تسجيل ولا دخول ولا ملف على خادم. الاسم الذي تكتبه في البداية لا يغادر هاتفك أبدًا.",
- p4:"بيانات على الجهاز",p5:"مكتبتك وقوائمك وتنزيلاتك وسجلّك وتعلّم محرك الذوق — كلها على الجهاز. وصدّر نسخة احتياطية متى أردت من الإعدادات.",
+ p4:"بيانات على الجهاز",p5:"مكتبتك وقوائمك وتنزيلاتك وسجلّك وتعلّم محرك الذوق — كلها على الجهاز. وصدّر نسخة احتياطية متى شئت من الإعدادات.",
  p6:"ماذا يستخدم الإنترنت؟",p7:"البحث في الكتالوج والبث والأغلفة والكلمات، وفحص التحديثات الرسمية على GitHub. تقارير الأعطال تُكتب على الجهاز ولا تُشارك إلا إذا ضغطت «إرسال».",
- q1:"هل التطبيق مجاني؟",q2:"نعم — مجاني للتنزيل والاستخدام، بدون حساب وبدون اشتراك.",
- q3:"هل هو فيروس؟ ولماذا يحذّرني أندرويد؟",q4:"لا. أندرويد يحذّر من أي تطبيق يُثبَّت خارج Google Play. انظر قسم الأمان بالأعلى: توقيع رسمي واحد من فريق Nokiatis، وبصمة SHA-256 منشورة لكل نسخة، وتحقّق داخل التطبيق قبل تثبيت أي تحديث.",
+ q0:"الأسئلة الشائعة",q1:"هل التطبيق مجاني؟",q2:"نعم — مجاني للتنزيل والاستخدام، بدون حساب وبدون اشتراك.",
+ q3:"هل هو فيروس؟ ولماذا يحذّرني أندرويد؟",q4:"لا. أندرويد يحذّر من أي تطبيق يُثبَّت خارج Google Play. انظر قسم الأمان بالأعلى: توقيع رسمي واحد من فريق Nokiatis، وبصمة SHA-256 منشورة لكل نسخة، وفحص فوري داخل الصفحة، ورابط VirusTotal لهذه النسخة بالضبط.",
  q5:"هل التحديثات تحذف أغانيّ وقوائمي؟",q6:"لا. التحديثات تُثبَّت فوق النسخة السابقة بنفس التوقيع، وأندرويد يحتفظ بكل بيانات التطبيق — المكتبة والقوائم والتنزيلات والسجل والإعدادات.",
  q7:"لماذا لا أستطيع البقاء على إصدار قديم؟",q8:"بالتصميم: الإصدارات تصلح الأخطاء وتجدّد مصادر البث التي تتغيّر مع الوقت، والنسخ القديمة ستتعطّل تدريجيًا. التحديث يستغرق أقل من دقيقة ويحفظ كل شيء.",
  q9:"أين تذهب التنزيلات؟",q10:"إلى قسم «التنزيلات» داخل التطبيق، جاهزة للتشغيل بدون إنترنت داخل Nokiatis MUC. استخدم زر التنزيل على أي أغنية أو ألبوم أو قائمة.",
- q11:"الموسيقى تتوقف عندما أغلق التطبيق. ساعدني!",q12:"هذا موفّر بطارية هاتفك. اسمح بالإشعارات واجعل البطارية «غير مقيّدة» — وعلى سامسونج أزل التطبيق من «التطبيقات النائمة» أيضًا.",
+ q11:"الموسيقى تتوقف عندما أغلق التطبيق. ساعدوني!",q12:"هذا موفّر بطارية هاتفك. اسمح بالإشعارات واجعل البطارية «غير مقيّدة» — وعلى سامسونج أزل التطبيق من «التطبيقات النائمة» أيضًا.",
  q13:"هل توجد نسخة آيفون؟",q14:"ليس في الوقت الحالي — Nokiatis MUC لأندرويد فقط (7.0 وأحدث).",
  q15:"حدث عطل. كيف أبلّغ عنه؟",q16:"افتح الإعدادات ← التشخيص داخل التطبيق وأرسل التقرير المحفوظ، أو قدّمه في صفحة تقارير الأعطال:",
  q17:"من يصنع Nokiatis MUC؟",q18:"فريق Nokiatis من أكادير، المغرب. هذه الصفحة ومستودع التحديثات الرسمي على GitHub هما المصدران الرسميان الوحيدان.",
  c0:"أحدث إصدار",c1:"ما الجديد في",c2:"نظام حركة بإحساس التطبيقات الأصلية في كل مكان، اضغط مرتين على الغلاف للإعجاب مع انفجار قلوب، أربعة ودجت للشاشة الرئيسية، تشغيل خلفي أقوى يبقى في «التطبيقات النشطة»، وأيقونة زجاج سائل جديدة.",
  c3:"اقرأ ملاحظات كل الإصدارات ←",
  ft1:"أكادير، المغرب",ft2:"تنزيل",ft3:"الأمان",ft4:"الإصدارات",ft5:"تقارير الأعطال",ft6:"تراخيص مفتوحة المصدر",
- ft7:"Nokiatis MUC مشغّل موسيقى مستقل من فريق Nokiatis، ولا علاقة له بـ YouTube أو Google أو Spotify. كل الموسيقى والأغلفة والكلمات ملك لأصحابها؛ من فضلك نزّل فقط المحتوى الذي يحق لك حفظه."
+ ft7:"Nokiatis MUC مشغّل موسيقى مستقل من فريق Nokiatis، ولا علاقة له بـ YouTube أو Google أو Spotify. كل الموسيقى والأغلفة والكلمات ملك لأصحابها؛ من فضلك نزّل فقط المحتوى الذي يحق لك حفظه.",
+ sb1:"أحدث إصدار",sb2:"⬇ ثبّت"
 }
 };
-var EN = {}; // captured from DOM on load
+var STR = {
+ en:{
+  andOk:function(v){return "✅ You're on Android " + v + " — Nokiatis MUC works on your phone. Tap Download!";},
+  andUnknown:"✅ You're on Android — tap Download to get the app.",
+  andOld:function(v){return "⚠️ Nokiatis MUC needs Android 7.0 or newer. This device reports Android " + v + ".";},
+  ios:"🍎 You're on an Apple device. Nokiatis MUC is an Android app — open this page on an Android phone to install it.",
+  desk:"💻 You're on a computer — scan the QR code with your Android phone (Download section), or download the APK here and transfer it.",
+  toast:"⬇ Downloading Nokiatis MUC… When it finishes, tap the downloaded file to install.",
+  copied:"🔗 Link copied — paste it on your Android phone.",
+  hashing:function(n){return "⏳ Checking “" + n + "”…";},
+  genuine:"✅ GENUINE — this file matches the official Team Nokiatis build exactly (same size and SHA-256). Safe to install.",
+  genuineSize:"✅ GENUINE — the SHA-256 matches the official Team Nokiatis build exactly. Safe to install.",
+  fake:"❌ NOT GENUINE — this file does not match the official build. Delete it and download again from this page.",
+  tooOld:"⚠️ This browser can't hash files here. open this page over HTTPS (or in Chrome) and try again.",
+  yourHash:"Your file's SHA-256"
+ },
+ ar:{
+  andOk:function(v){return "✅ أنت على أندرويد " + v + " — Nokiatis MUC يعمل على هاتفك. اضغط تنزيل!";},
+  andUnknown:"✅ أنت على أندرويد — اضغط تنزيل للحصول على التطبيق.",
+  andOld:function(v){return "⚠️ Nokiatis MUC يحتاج أندرويد 7.0 أو أحدث. جهازك يُفيد بأندرويد " + v + ".";},
+  ios:"🍎 أنت على جهاز آبل. Nokiatis MUC تطبيق أندرويد — افتح هذه الصفحة على هاتف أندرويد لتثبيته.",
+  desk:"💻 أنت على حاسوب — امسح رمز QR بهاتف أندرويد (في قسم التنزيل بالأسفل)، أو نزّل الملف هنا وانقله لهاتفك.",
+  toast:"⬇ جارٍ تنزيل Nokiatis MUC… عند الانتهاء اضغط على الملف المنزَّل لتثبيته.",
+  copied:"🔗 تم نسخ الرابط — الصقه على هاتف أندرويد.",
+  hashing:function(n){return "⏳ جارٍ فحص «" + n + "»…";},
+  genuine:"✅ أصلية — هذا الملف يطابق النسخة الرسمية من فريق Nokiatis تمامًا (نفس الحجم وبصمة SHA-256). آمن للتثبيت.",
+  genuineSize:"✅ أصلية — بصمة SHA-256 تطابق النسخة الرسمية من فريق Nokiatis تمامًا. آمن للتثبيت.",
+  fake:"❌ غير أصلية — هذا الملف لا يطابق النسخة الرسمية. احذفه ونزّله من جديد من هذه الصفحة.",
+  tooOld:"⚠️ هذا المتصفح لا يستطيع حساب البصمة هنا. افتح الصفحة عبر HTTPS (أو في Chrome) وحاول من جديد.",
+  yourHash:"بصمة ملفك SHA-256"
+ }
+};
+var EN = {};
 document.querySelectorAll('[data-i]').forEach(function(el){ EN[el.getAttribute('data-i')] = el.innerHTML; });
 var feedNotes = null, curLang = 'en';
+var officialSha = '6639f954a9227fa12db8b7de39ed95c5319359d1a7de4c5d4696d7411723fac0', officialSize = 48949129;
+/* ---- platform detection ---- */
+var UA = navigator.userAgent || '';
+var isAndroid = /Android/i.test(UA);
+var isIOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+var andVerMatch = UA.match(/Android\s+(\d+(?:\.\d+)?)/i);
+var andVer = andVerMatch ? parseFloat(andVerMatch[1]) : null;
+if(isAndroid) document.body.classList.add('is-android', 'has-bar');
+function S(){ return STR[curLang] || STR.en; }
+function renderCompat(){
+  var el = document.getElementById('compatLine');
+  var s = S(), cls = 'ok', msg = '';
+  if(isAndroid){
+    if(andVer !== null && andVer < 7){ cls = 'warn'; msg = s.andOld(andVerMatch[1]); }
+    else if(andVer !== null){ msg = s.andOk(andVerMatch[1]); }
+    else { msg = s.andUnknown; }
+  } else if(isIOS){ cls = 'info'; msg = s.ios; }
+  else { cls = 'info'; msg = s.desk; }
+  el.className = 'compat show ' + cls;
+  el.textContent = msg;
+  document.getElementById('qrCard').classList.toggle('show', !isAndroid);
+}
 function applyLang(l){
   curLang = l;
   var ar = (l === 'ar');
@@ -412,6 +571,7 @@ function applyLang(l){
     el.innerHTML = ar ? (T.ar[k] || EN[k]) : EN[k];
   });
   if(feedNotes && !ar) document.getElementById('clBody').textContent = feedNotes;
+  renderCompat();
   try{ localStorage.setItem('nk-lang', l); }catch(e){}
 }
 document.getElementById('langBtn').addEventListener('click', function(){ applyLang(curLang === 'ar' ? 'en' : 'ar'); });
@@ -420,18 +580,89 @@ document.getElementById('langBtn').addEventListener('click', function(){ applyLa
   try{ saved = localStorage.getItem('nk-lang'); }catch(e){}
   applyLang(saved || ((navigator.language || 'en').toLowerCase().indexOf('ar') === 0 ? 'ar' : 'en'));
 })();
-// Keep the download facts in sync with the official update feed.
+/* ---- toast ---- */
+var toastTimer = null;
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 4500);
+}
+document.querySelectorAll('.dl-btn').forEach(function(a){
+  a.addEventListener('click', function(){ if(isAndroid) toast(S().toast); });
+});
+document.getElementById('stickyClose').addEventListener('click', function(){
+  document.getElementById('stickyBar').style.display = 'none';
+  document.body.classList.remove('has-bar');
+});
+document.getElementById('copyBtn').addEventListener('click', function(){
+  var url = location.href;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){ toast(S().copied); }).catch(function(){});
+  } else {
+    var ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta);
+    ta.select(); try{ document.execCommand('copy'); toast(S().copied); }catch(e){}
+    document.body.removeChild(ta);
+  }
+});
+/* ---- reveal on scroll ---- */
+(function(){
+  var els = document.querySelectorAll('.card,.shot,.step,.witem,.dl-box,.verify,.callout,details');
+  if(!('IntersectionObserver' in window)) return;
+  els.forEach(function(el){ el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold: 0.12});
+  els.forEach(function(el){ io.observe(el); });
+})();
+/* ---- APK verifier (100% local) ---- */
+(function(){
+  var drop = document.getElementById('drop'), input = document.getElementById('fileInput'), out = document.getElementById('vResult');
+  function show(cls, html){ out.className = 'v-result show ' + cls; out.innerHTML = html; }
+  async function check(file){
+    if(!file) return;
+    var s = S();
+    if(!window.isSecureContext || !crypto || !crypto.subtle){ show('bad', s.tooOld); return; }
+    show('busy', s.hashing(file.name));
+    try{
+      var buf = await file.arrayBuffer();
+      var digest = await crypto.subtle.digest('SHA-256', buf);
+      var hex = Array.from(new Uint8Array(digest)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+      var detail = '<br><span class="mono">' + s.yourHash + ': ' + hex.slice(0,20) + '…' + hex.slice(-8) + ' · ' + file.size.toLocaleString('en-US') + ' B</span>';
+      if(hex.toLowerCase() === String(officialSha).toLowerCase()){
+        show('ok', (file.size === officialSize ? s.genuine : s.genuineSize) + detail);
+      } else {
+        show('bad', s.fake + detail);
+      }
+    }catch(e){ show('bad', s.tooOld); }
+  }
+  drop.addEventListener('click', function(){ input.click(); });
+  drop.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); input.click(); } });
+  input.addEventListener('change', function(){ check(input.files[0]); input.value = ''; });
+  ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; check(f); });
+})();
+/* ---- live feed sync ---- */
 fetch('https://raw.githubusercontent.com/itzraynx/nokiatis-muc-updates/main/update.json', {cache:'no-store'})
   .then(function(r){ return r.json(); })
   .then(function(f){
     if(!f || !f.latestVersion) return;
+    var mb = '≈ ' + (f.apkSize/1048576).toFixed(1) + ' MB';
     document.getElementById('vText').textContent = f.latestVersion;
-    document.getElementById('sizeText').textContent = '≈ ' + (f.apkSize/1048576).toFixed(1) + ' MB';
+    document.getElementById('sizeText').textContent = mb;
     document.getElementById('dlVersion').textContent = 'v' + f.latestVersion;
     document.getElementById('dlSize').textContent = Number(f.apkSize).toLocaleString('en-US') + ' bytes';
-    if(f.sha256) document.getElementById('dlSha').textContent = f.sha256;
+    document.getElementById('sbVer').textContent = 'v' + f.latestVersion;
+    document.getElementById('sbSize').textContent = mb;
+    if(f.sha256){
+      officialSha = f.sha256;
+      document.getElementById('dlSha').textContent = f.sha256;
+      document.getElementById('vtReport').href = 'https://www.virustotal.com/gui/file/' + f.sha256;
+    }
+    if(f.apkSize) officialSize = f.apkSize;
     if(f.publishedAt) document.getElementById('dlDate').textContent = String(f.publishedAt).slice(0,10);
-    if(f.apkUrl){ ['navDownload','heroDownload','mainDownload'].forEach(function(id){ document.getElementById(id).href = f.apkUrl; }); }
+    if(f.apkUrl){ ['navDownload','heroDownload','mainDownload','stickyDownload'].forEach(function(id){ document.getElementById(id).href = f.apkUrl; }); }
     document.getElementById('clVer').textContent = 'v' + f.latestVersion;
     if(f.releaseNotes){ feedNotes = f.releaseNotes; if(curLang !== 'ar') document.getElementById('clBody').textContent = f.releaseNotes; }
   })
