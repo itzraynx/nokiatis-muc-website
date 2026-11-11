@@ -50,12 +50,25 @@ function asNumber(v: unknown, fallback = 0): number {
 function normalise(raw: unknown, channel: "stable" | "beta"): ChannelResult | null {
   if (typeof raw !== "object" || raw === null) return null;
   const r = raw as Record<string, unknown>;
+  // The feed is published in a dual shape: the repo's current manifests use
+  // the latestVersionName / latestVersionCode / apkUrl / releaseNotes /
+  // publishedAt family, older historical feeds used versionName / version /
+  // downloadUrl. Both must read.
   const versionName =
+    asString(r.latestVersionName) ||
     asString(r.versionName) ||
     asString(r.version) ||
     asString(r.version_name) ||
-    (typeof r.versionCode === "number" || typeof r.version_code === "number"
-      ? String(asNumber(r.versionCode, asNumber(r.version_code)))
+    asString(r.latestVersion) ||
+    (typeof r.latestVersionCode === "number" ||
+    typeof r.versionCode === "number" ||
+    typeof r.version_code === "number"
+      ? String(
+          asNumber(
+            r.latestVersionCode,
+            asNumber(r.versionCode, asNumber(r.version_code)),
+          ),
+        )
       : "");
   if (!versionName) return null;
 
@@ -68,6 +81,7 @@ function normalise(raw: unknown, channel: "stable" | "beta"): ChannelResult | nu
     "";
 
   const downloadUrl =
+    asString(r.apkUrl) ||
     asString(r.downloadUrl) ||
     asString(r.apk) ||
     asString(r.url) ||
@@ -79,12 +93,16 @@ function normalise(raw: unknown, channel: "stable" | "beta"): ChannelResult | nu
     asString(r.date) ||
     asString(r.release_date) ||
     asString(r.publishedAt) ||
+    asString(r.published_at) ||
     "";
 
   return {
     channel,
     versionName,
-    versionCode: asNumber(r.versionCode, asNumber(r.version_code, 0)),
+    versionCode: asNumber(
+      r.latestVersionCode,
+      asNumber(r.versionCode, asNumber(r.version_code, 0)),
+    ),
     releaseDate,
     notes,
     downloadUrl,
@@ -92,25 +110,43 @@ function normalise(raw: unknown, channel: "stable" | "beta"): ChannelResult | nu
 }
 
 async function fetchJson(url: string, timeoutMs = 6000): Promise<unknown> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      signal: controller.signal,
-      cache: "no-store",
-      headers: { Accept: "application/json" },
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as unknown;
-  } catch {
-    return null; // aborted / network error / bad JSON
-  } finally {
-    clearTimeout(timer);
+  // Two quick attempts: raw.githubusercontent answers from several edges and
+  // a single hiccup should not blind the update checker.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const res = await fetch(url, {
+        signal: controller.signal,
+        cache: "no-store",
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) {
+        console.warn(`[updates] ${url} → HTTP ${res.status}`);
+        continue;
+      }
+      return (await res.json()) as unknown;
+    } catch (err) {
+      console.warn(
+        `[updates] ${url} → ${err instanceof Error ? err.name : "error"}: ${
+          err instanceof Error ? err.message : ""
+        } (attempt ${attempt + 1})`,
+      );
+    } finally {
+      clearTimeout(timer);
+    }
   }
+  return null;
 }
 
 export async function GET(_req: NextRequest) {
-  if (cache && Date.now() - cache.ts < TTL_MS) {
+  // Successes are cached for 5 minutes (GitHub stays calm under the 10-min
+  // polling of many open launchers). Failures are retried after just 30
+  // seconds — one transient DNS hiccup must not keep every client blind to
+  // a brand-new release for five minutes.
+  const ERROR_TTL_MS = 30 * 1000;
+  const effectiveTtl = cache?.body.ok ? TTL_MS : ERROR_TTL_MS;
+  if (cache && Date.now() - cache.ts < effectiveTtl) {
     return NextResponse.json(cache.body);
   }
 
