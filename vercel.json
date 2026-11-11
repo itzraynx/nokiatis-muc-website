@@ -1,6 +1,21 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/s/:path*", "destination": "/share.html" },
+    { "source": "/p/:path*", "destination": "/share.html" }
+  ],
   "headers": [
-    { "source": "/images/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=604800" } ] }
+    {
+      "source": "/images/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    },
+    {
+      "source": "/banners/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    },
+    {
+      "source": "/artists/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    }
   ]
 }

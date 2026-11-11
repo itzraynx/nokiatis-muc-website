@@ -1,35 +1,41 @@
-# Nokiatis MUC — Official Website
+# Nokiatis MUC — Web Launcher (v1.17.3-beta.1)
 
-The official website for **Nokiatis MUC** by **Team Nokiatis**: bilingual (English ⇄ العربية, full RTL),
-real screenshots, a safety/verification section, install guide, widgets, FAQ — and a download button
-that always serves the newest official APK (version, size and SHA-256 sync automatically from the
-[`update.json` feed](https://github.com/itzraynx/nokiatis-muc-updates)).
+The official web launcher of **Nokiatis MUC** by **Team Nokiatis** — a
+Spotify-grade Arabic-first music experience that runs in the browser:
 
-No build step: plain `index.html` + `images/`. Deploy anywhere static.
+- **Nokiatis Intelligence** — an AI engine that learns your taste from every
+  play, skip and like (exponential recency decay, completion weighting),
+  builds a cross-device taste profile and five daily smart playlists
+  (مزيج اليوم / اكتشاف الأسبوع / استمع مجددًا / طاقة عالية / هدوء), plus
+  LLM-written Arabic taste insights.
+- **Nokiatis Cloud** — Supabase-backed account sync (library, playlists,
+  history, taste memory) with union merge and tombstones. The AI event block
+  is byte-compatible with the Android app, so listening on the phone counts
+  on the web and vice versa.
+- **الخزنة السحابية (Vault)** — a password-gated favorites page where every
+  byte of your cloud data can be viewed, managed, exported or wiped.
+- **Update notifications** — browser notifications + in-app bell whenever a
+  new Nokiatis MUC release (stable *or* beta) is published.
+- Full player with Web Audio mastering chain, share links + QR, RTL Arabic
+  UI, profile icon saved locally.
 
-## Deploy on Netlify (1 click)
+Deployed automatically by Vercel on every push to `main`.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/itzraynx/nokiatis-muc-website)
-
-…or drag this folder onto https://app.netlify.com/drop — `netlify.toml` is already configured
-(publish directory `.`, no build command).
-
-## Deploy on Vercel (1 click)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/itzraynx/nokiatis-muc-website)
-
-`vercel.json` is already configured (static, clean URLs).
-
-## Files
+## Structure
 
 | Path | What |
 |---|---|
-| `index.html` | The whole site (styles + EN/AR translations + feed sync inline) |
-| `images/` | App icon + screenshots (home, lyrics, search, library, history, settings, widgets) |
-| `netlify.toml` / `vercel.json` | Zero-config static deploys |
+| `src/` | The Next.js (App Router) launcher |
+| `public/` | Static assets (banners, artist portraits, service worker) |
+| `public/download.html` | The classic standalone download/landing page |
+| `share.html` | Legacy share deep-link handler (`/s/*`, `/p/*`) |
 
-## Notes
+The only secrets in this repo are public-by-design publishable keys; RLS on
+the cloud table is what protects user data.
 
-- The download info (version, size, SHA-256, date, direct APK link) is fetched at runtime from the
-  official feed, so new app releases appear on the site with **no site changes needed**.
-- Fallback values baked into the HTML match v1.12.0 in case the feed is unreachable.
+## Development
+
+```bash
+npm install
+npm run dev   # http://localhost:3000
+```

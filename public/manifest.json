@@ -1,0 +1,19 @@
+{
+  "name": "Nokiatis MUC — مشغّل الموسيقى الذكي",
+  "short_name": "Nokiatis MUC",
+  "description": "ذكاء Nokiatis Intelligence يتعلم ذوقك ويرشّح لك الموسيقى — مزامنة سحابية كاملة.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
