@@ -33,6 +33,24 @@ export interface Track {
   artist: string;
 }
 
+/**
+ * The Android app's compact track form. The app does
+ * `playlist.tracks.map(...)` on every playlist it pulls, so EVERY playlist
+ * this client writes MUST carry a tracks array — a playlist with only
+ * songIds crashes the phone with "Cannot read property 'map' of undefined"
+ * (the Nov-2026 sync outage). songIds remains the web's own index; tracks
+ * is the cross-client metadata copy that travels with it.
+ */
+export interface CompactTrack {
+  i: string;
+  t: string;
+  a: string;
+  d?: number;
+  al?: string;
+  img?: string;
+  [key: string]: unknown;
+}
+
 /** playedAt is epoch MILLISECONDS (handover trap list §11). */
 export interface HistoryEntry {
   id: string;
@@ -55,6 +73,8 @@ export interface Playlist {
   id: string;
   name: string;
   songIds: string[];
+  /** Cross-client metadata — the Android app renders/plays from this. */
+  tracks?: CompactTrack[];
   updatedAt: number;
 }
 
@@ -283,6 +303,42 @@ function asHistory(input: unknown): HistoryEntry[] {
   return [...byId.values()];
 }
 
+/** Sanitize an unknown tracks array into the app's compact form. */
+function asCompactTracks(input: unknown): CompactTrack[] | undefined {
+  if (!Array.isArray(input)) return undefined;
+  const out: CompactTrack[] = [];
+  for (const raw of input) {
+    if (typeof raw !== "object" || raw === null) continue;
+    const t = raw as {
+      i?: unknown;
+      t?: unknown;
+      a?: unknown;
+      d?: unknown;
+      al?: unknown;
+      img?: unknown;
+    };
+    if (typeof t.i !== "string" || !t.i) continue;
+    out.push({
+      i: t.i,
+      t: typeof t.t === "string" ? t.t : "",
+      a: typeof t.a === "string" ? t.a : "",
+      ...(typeof t.d === "number" && Number.isFinite(t.d) ? { d: t.d } : {}),
+      ...(typeof t.al === "string" && t.al ? { al: t.al } : {}),
+      ...(typeof t.img === "string" && t.img ? { img: t.img } : {}),
+    });
+  }
+  return out;
+}
+
+/** songIds -> compact tracks, using the catalogue for real metadata. */
+function tracksFromSongIds(songIds: string[], catalogue: Track[]): CompactTrack[] {
+  const byId = new Map(catalogue.map((t) => [t.id, t]));
+  return songIds.map((id) => {
+    const t = byId.get(id);
+    return t ? { i: id, t: t.title, a: t.artist } : { i: id, t: "", a: "" };
+  });
+}
+
 function asPlaylists(input: unknown): Playlist[] {
   if (!Array.isArray(input)) return [];
   const out: Playlist[] = [];
@@ -294,10 +350,12 @@ function asPlaylists(input: unknown): Playlist[] {
         typeof p.name === "string" &&
         typeof p.updatedAt === "number"
       ) {
+        const tracks = asCompactTracks(p.tracks);
         out.push({
           id: p.id,
           name: p.name,
           songIds: asStrings(p.songIds),
+          ...(tracks ? { tracks } : {}),
           updatedAt: p.updatedAt,
         });
         continue;
@@ -310,10 +368,12 @@ function asPlaylists(input: unknown): Playlist[] {
         updatedAt?: unknown;
       };
       if (typeof c.id === "string" && typeof c.name === "string") {
+        const tracks = asCompactTracks(c.tracks);
         out.push({
           id: c.id,
           name: c.name,
           songIds: asTrackIds(c.tracks),
+          ...(tracks ? { tracks } : {}),
           updatedAt: typeof c.updatedAt === "number" ? c.updatedAt : 0,
         });
       }
@@ -587,7 +647,16 @@ export function buildSnapshot(lib: LocalLibrary): CloudSnapshot {
     downloaded: lib.downloaded.map(byId).filter((t): t is Track => Boolean(t)),
     recents: [...lib.recents].slice(0, RECENTS_CAP),
     history: [...lib.history].slice(0, HISTORY_CAP),
-    playlists: lib.playlists.map((p) => ({ ...p, songIds: [...p.songIds] })),
+    playlists: lib.playlists.map((p) => ({
+      ...p,
+      songIds: [...p.songIds],
+      // The phone does playlist.tracks.map(...) — this array is mandatory
+      // on every playlist we write, even an empty one.
+      tracks:
+        p.tracks && p.tracks.length
+          ? [...p.tracks]
+          : tracksFromSongIds(p.songIds, lib.catalogue),
+    })),
     bookmarks: lib.bookmarks.map((b) => ({ ...b })),
     follows: lib.follows.map((f) => ({ ...f })),
     pins: [...lib.pins],
@@ -642,6 +711,22 @@ function unionStrings(local: string[], remote: string[]): string[] {
 }
 
 /** Union by id; songs unioned; metadata from the newer updatedAt. */
+function unionCompactTracks(
+  a?: CompactTrack[],
+  b?: CompactTrack[],
+): CompactTrack[] | undefined {
+  if (!a?.length && !b?.length) return undefined;
+  const out: CompactTrack[] = [];
+  const seen = new Set<string>();
+  for (const t of [...(a ?? []), ...(b ?? [])]) {
+    if (t && typeof t.i === "string" && !seen.has(t.i)) {
+      seen.add(t.i);
+      out.push(t);
+    }
+  }
+  return out;
+}
+
 function mergePlaylists(local: Playlist[], remote: Playlist[], tomb: Set<string>): Playlist[] {
   const byId = new Map<string, Playlist>();
   for (const p of [...local, ...remote]) {
@@ -658,6 +743,7 @@ function mergePlaylists(local: Playlist[], remote: Playlist[], tomb: Set<string>
     byId.set(p.id, {
       ...metaFrom,
       songIds: unionStrings(existing.songIds, p.songIds),
+      tracks: unionCompactTracks(existing.tracks, p.tracks),
     });
   }
   return [...byId.values()];
